@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+*.pyo
+data/refresh_log.json
+.env

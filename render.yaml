@@ -1,0 +1,40 @@
+services:
+  # Web Service - Flask 应用
+  - type: web
+    name: youtube-trending-platform
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r ../requirements.txt
+    startCommand: python app.py
+    envVars:
+      - key: YOUTUBE_API_KEY
+        sync: false
+      - key: GITHUB_TOKEN
+        sync: false
+      - key: GITHUB_REPO
+        sync: false
+      - key: GITHUB_DATA_BRANCH
+        value: main
+      - key: HOST
+        value: 0.0.0.0
+      - key: FLASK_DEBUG
+        value: "0"
+    autoDeploy: true
+
+  # Cron Job - 每日数据刷新 (UTC 02:20 = 北京时间 10:20)
+  - type: cron
+    name: daily-refresh
+    runtime: python
+    rootDir: backend
+    schedule: "20 2 * * *"
+    command: python daily_refresh.py
+    buildCommand: pip install -r ../requirements.txt
+    envVars:
+      - key: YOUTUBE_API_KEY
+        sync: false
+      - key: GITHUB_TOKEN
+        sync: false
+      - key: GITHUB_REPO
+        sync: false
+      - key: GITHUB_DATA_BRANCH
+        value: main

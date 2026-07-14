@@ -1,0 +1,2913 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旭星-YouTube热点库</title>
+    <link rel="icon" type="image/png" href="/starroad/assets/logo.png?v=2">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --primary: #00c853;
+            --primary-dark: #00a844;
+            --primary-light: #f0fdf4;
+            --primary-lighter: #f7fef9;
+            --bg: #f8fcf9;
+            --card-bg: #ffffff;
+            --text: #1a2e22;
+            --text-secondary: #6b8a72;
+            --border: #e0ece3;
+            --success: #00c853;
+            --warning: #f9ab00;
+            --danger: #d93025;
+            --accent: #00e676;
+            --yt-red: #ff0000;
+            --yt-dark: #0f0f0f;
+            --genshin-blue: #4ec2f1;
+            --genshin-gold: #d4a843;
+            --genshin-purple: #9b6dd7;
+            --shadow: 0 1px 3px rgba(0,80,40,0.05), 0 1px 2px rgba(0,80,40,0.03);
+            --shadow-lg: 0 4px 16px rgba(0,80,40,0.08), 0 2px 6px rgba(0,80,40,0.04);
+            --radius: 12px;
+            --sidebar-bg: #fcfffb;
+            --sidebar-text: #2e7d32;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* YouTube-style top accent line on main content */
+        .main::before {
+            content: '';
+            display: block;
+            height: 3px;
+            background: linear-gradient(90deg, var(--yt-red) 0%, var(--yt-red) 30%, var(--primary) 30%, var(--primary) 60%, var(--genshin-gold) 60%, var(--genshin-gold) 100%);
+            border-radius: 2px;
+            margin-bottom: 20px;
+        }
+
+        /* ===== Sidebar (极浅白绿 + Genshin背景) ===== */
+        .sidebar {
+            position: fixed;
+            left: 0; top: 0; bottom: 0;
+            width: 250px;
+            background-color: var(--sidebar-bg);
+            background-image:
+                linear-gradient(180deg, rgba(252,255,251,0.94) 0%, rgba(245,250,244,0.90) 40%, rgba(232,245,233,0.82) 100%),
+                url('/starroad/assets/genshin-bg-sidebar.png');
+            background-size: cover;
+            background-position: 70% center;
+            color: var(--sidebar-text);
+            padding: 0;
+            z-index: 100;
+            box-shadow: 2px 0 12px rgba(0,40,20,0.08);
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--border);
+        }
+        /* YouTube-style red accent bar at top of sidebar */
+        .sidebar::before {
+            content: '';
+            display: block;
+            height: 4px;
+            background: linear-gradient(90deg, var(--yt-red) 0%, var(--yt-red) 40%, var(--primary) 40%, var(--primary) 100%);
+            flex-shrink: 0;
+        }
+        .sidebar-logo {
+            padding: 16px 20px 14px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .sidebar-logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            overflow: hidden;
+            background: var(--primary-light);
+            box-shadow: 0 2px 6px rgba(0,200,83,0.15);
+        }
+        .sidebar-logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .sidebar-logo h1 {
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 0.2px;
+            line-height: 1.3;
+            color: var(--text);
+        }
+        .sidebar-logo p {
+            font-size: 10px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+        .nav-section {
+            flex: 1;
+            overflow-y: auto;
+            padding: 4px 8px;
+        }
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 10px;
+            margin: 2px 0;
+        }
+        .nav-item:hover {
+            background: rgba(0,200,83,0.06);
+            color: var(--primary-dark);
+        }
+        .nav-item.active {
+            background: rgba(0,200,83,0.10);
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+        .nav-item svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+        .nav-section-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            opacity: 0.5;
+            padding: 10px 14px 4px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .sidebar-footer {
+            padding: 12px 14px;
+            border-top: 1px solid var(--border);
+        }
+        .admin-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 10px;
+            background: rgba(0,200,83,0.05);
+            border-radius: 8px;
+            font-size: 12px;
+            margin-bottom: 6px;
+            color: var(--text);
+        }
+        .admin-badge.not-admin { opacity: 0.6; }
+        .admin-dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: var(--primary);
+            flex-shrink: 0;
+            box-shadow: 0 0 0 2px rgba(0,200,83,0.2);
+        }
+        .admin-badge.not-admin .admin-dot { background: #bbb; box-shadow: none; }
+
+        /* Genshin character silhouette on sidebar - Paimon-like fairy figure */
+        .sidebar::after {
+            content: '';
+            position: absolute;
+            bottom: 50px; right: -10px;
+            width: 220px; height: 320px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 320'%3E%3Cg%3E%3Cg opacity='0.09'%3E%3Cpath d='M75 45 L82 30 L88 42 L95 25 L100 38 L105 25 L112 42 L118 30 L125 45 L120 50 L80 50 Z' fill='%23d4a843'/%3E%3Cellipse cx='100' cy='48' rx='28' ry='5' fill='%23d4a843' opacity='0.5'/%3E%3Ccircle cx='100' cy='68' r='16' fill='%2300a844'/%3E%3Cpath d='M84 62 C78 58 76 66 80 73 C82 76 84 78 86 75 Z' fill='%2300a844'/%3E%3Cpath d='M116 62 C122 58 124 66 120 73 C118 76 116 78 114 75 Z' fill='%2300a844'/%3E%3Cpath d='M88 84 C83 90 81 105 86 115 C90 120 110 120 114 115 C119 105 117 90 112 84 Z' fill='%2300a844'/%3E%3Cpath d='M84 88 C74 98 70 112 76 126 C80 120 85 110 88 104 Z' fill='%2300c853'/%3E%3Cpath d='M116 88 C126 98 130 112 124 126 C120 120 115 110 112 104 Z' fill='%2300c853'/%3E%3Cpath d='M55 55 L57 60 L62 60 L58 63 L60 68 L55 65 L50 68 L52 63 L48 60 L53 60 Z' fill='%23d4a843'/%3E%3Cpath d='M145 55 L147 60 L152 60 L148 63 L150 68 L145 65 L140 68 L142 63 L138 60 L143 60 Z' fill='%23d4a843'/%3E%3Cpath d='M60 105 L62 110 L67 110 L63 113 L65 118 L60 115 L55 118 L57 113 L53 110 L58 110 Z' fill='%23d4a843'/%3E%3Cpath d='M140 105 L142 110 L147 110 L143 113 L145 118 L140 115 L135 118 L137 113 L133 110 L138 110 Z' fill='%23d4a843'/%3E%3Cpath d='M100 18 L102 23 L107 23 L103 26 L105 31 L100 28 L95 31 L97 26 L93 23 L98 23 Z' fill='%23d4a843'/%3E%3C/g%3E%3Cg opacity='0.06'%3E%3Cpath d='M35 160 L45 148 L40 160 L50 172 L33 166 Z' fill='%239b6dd7'/%3E%3Cpath d='M160 165 C152 159 154 169 160 173 C166 169 168 159 160 165 Z' fill='%23558b2f'/%3E%3Cg stroke='%2380deea' stroke-width='1.5' fill='none'%3E%3Cline x1='40' y1='230' x2='40' y2='250'/%3E%3Cline x1='30' y1='240' x2='50' y2='240'/%3E%3Cline x1='33' y1='233' x2='47' y2='247'/%3E%3Cline x1='47' y1='233' x2='33' y2='247'/%3E%3Ccircle cx='40' cy='240' r='3' fill='%2380deea'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E") no-repeat center;
+            background-size: contain;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .sidebar > * { position: relative; z-index: 1; }
+
+        /* Genshin element symbols as subtle background pattern on main content */
+        .main::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 250px; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cg opacity='0.025' fill='%2300c853'%3E%3Cpath d='M150 80 C140 80 132 88 132 98 C132 108 140 116 150 116 C160 116 168 108 168 98 C168 88 160 80 150 80 Z M150 70 L155 55 L145 55 Z M170 105 L185 100 L185 110 Z M130 105 L115 100 L115 110 Z M150 128 L155 143 L145 143 Z'/%3E%3Cpath d='M50 200 C45 200 41 204 41 209 C41 214 45 218 50 218 C55 218 59 214 59 209 C59 204 55 200 50 200 Z M50 195 L53 185 L47 185 Z M62 212 L72 209 L72 215 Z M38 212 L28 209 L28 215 Z M50 224 L53 234 L47 234 Z'/%3E%3Cpath d='M250 180 C243 180 237 186 237 193 C237 200 243 206 250 206 C257 206 263 200 263 193 C263 186 257 180 250 180 Z'/%3E%3C/g%3E%3C/svg%3E") repeat;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* ===== Main content ===== */
+        .main {
+            margin-left: 250px;
+            padding: 24px 32px;
+            min-height: 100vh;
+        }
+        .page { display: none; }
+        .page.active { display: block; }
+
+        .page-header { margin-bottom: 24px; }
+        .page-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        /* ===== Cards ===== */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: box-shadow 0.2s;
+            border: 1px solid rgba(200,230,201,0.4);
+        }
+        .card:hover { box-shadow: var(--shadow-lg); }
+
+        /* ===== Stats grid ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border: 1px solid rgba(200,230,201,0.4);
+        }
+        .stat-icon {
+            width: 48px; height: 48px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        .stat-info h3 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1;
+        }
+        .stat-info p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+        .stat-today {
+            font-size: 11px;
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: 2px;
+        }
+        .stat-today-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            background: var(--primary-light);
+            color: var(--text-secondary);
+        }
+        .stat-today-badge.has-new {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ===== Tables ===== */
+        .table-wrapper { overflow-x: auto; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        th {
+            text-align: left;
+            padding: 12px 16px;
+            background: var(--primary-lighter);
+            color: var(--primary-dark);
+            font-weight: 700;
+            white-space: nowrap;
+            cursor: pointer;
+            user-select: none;
+            border-bottom: 2px solid var(--primary);
+        }
+        th:hover { opacity: 0.7; }
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+        tr:hover td { background: rgba(0,200,83,0.02); }
+        .video-thumb {
+            width: 120px; height: 68px;
+            border-radius: 6px;
+            object-fit: cover;
+        }
+        .top3-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        @media (max-width: 1100px) {
+            .top3-grid { grid-template-columns: 1fr; }
+        }
+        .top3-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fdf9 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+        .top3-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,200,83,0.12);
+            border-color: rgba(0,200,83,0.3);
+        }
+        .top3-rank {
+            position: absolute;
+            top: -8px;
+            left: 14px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+        .top3-rank-1 { background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%); }
+        .top3-rank-2 { background: linear-gradient(135deg, #c0c0c0 0%, #a0a0a0 100%); }
+        .top3-rank-3 { background: linear-gradient(135deg, #cd7f32 0%, #b87333 100%); }
+        .top3-thumb {
+            width: 100%;
+            height: 110px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        .top3-title {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 6px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .top3-channel {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+        .top3-stats {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            font-size: 12px;
+        }
+        .top3-stat {
+            background: var(--primary-light);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .top3-stat-growth {
+            background: #fff3e0;
+            color: #e65100;
+        }
+        .top3-empty {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+        }
+        .channel-avatar {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* ===== Badges ===== */
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .badge-green { background: #e8f5e9; color: #2e7d32; }
+        .badge-blue { background: #e3f2fd; color: #1565c0; }
+        .badge-orange { background: #fef7e0; color: #f9ab00; }
+        .badge-red { background: #fce8e6; color: #d93025; }
+        .badge-purple { background: #f3e8fd; color: #7b1fa2; }
+        .badge-teal { background: #e0f2f1; color: #00695c; }
+        .badge-primary-tag { background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
+        .badge-secondary-tag { background: #f1f8e9; color: #558b2f; border: 1px solid #dcedc8; }
+        .badge-region-eu { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+        .badge-region-us { background: #fce8e6; color: #c62828; border: 1px solid #ef9a9a; }
+        .badge-region-asia { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .badge-region-other { background: #f3e5f5; color: #6a1b9a; border: 1px solid #ce93d8; }
+        .badge-lang { background: #e0f7fa; color: #00838f; border: 1px solid #80deea; }
+        .badge-up { background: #e8f5e9; color: #2e7d32; }
+        .badge-down { background: #fce8e6; color: #c62828; }
+
+        /* ===== Forms ===== */
+        .form-group { margin-bottom: 16px; }
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+            background: white;
+        }
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0,200,83,0.12);
+        }
+        .form-textarea { min-height: 80px; resize: vertical; }
+
+        /* ===== Buttons ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-primary:hover { background: var(--primary-dark); box-shadow: 0 2px 8px rgba(0,200,83,0.3); }
+        .btn-secondary {
+            background: white;
+            color: var(--primary-dark);
+            border: 1px solid var(--primary);
+        }
+        .btn-secondary:hover { background: var(--primary-light); }
+        .btn-danger { background: var(--danger); color: white; }
+        .btn-sm { padding: 6px 14px; font-size: 12px; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* ===== Filters bar ===== */
+        .filters-bar {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .filters-bar .form-input,
+        .filters-bar .form-select {
+            width: auto;
+            min-width: 140px;
+        }
+
+        /* ===== Grid layouts ===== */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+        }
+        @media (max-width: 900px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+        /* ===== Creator card ===== */
+        .creator-card {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        .creator-card img { flex-shrink: 0; }
+        .creator-info { flex: 1; min-width: 0; }
+        .creator-info h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .creator-info p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .creator-stats {
+            display: flex;
+            gap: 16px;
+            margin-top: 8px;
+            font-size: 13px;
+            flex-wrap: wrap;
+        }
+        .creator-stat {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .creator-stat strong { color: var(--primary-dark); }
+        .daily-change {
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .daily-change.up { color: var(--primary); }
+        .daily-change.down { color: var(--danger); }
+
+        /* ===== Today new creator highlight ===== */
+        .creator-card-new {
+            border-left: 4px solid var(--primary) !important;
+            background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 40%, #f0fdf4 100%) !important;
+            box-shadow: 0 2px 12px rgba(0,200,83,0.15) !important;
+            position: relative;
+            overflow: hidden;
+        }
+        .creator-card-new::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 50%, var(--primary) 100%);
+        }
+        .badge-today-new {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,200,83,0.3);
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 2px 6px rgba(0,200,83,0.3); }
+            50% { box-shadow: 0 2px 12px rgba(0,200,83,0.5); }
+        }
+
+        /* ===== Tag selectors ===== */
+        .tag-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 8px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            min-height: 42px;
+        }
+        .tag-option {
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #f5f5f5;
+            color: var(--text-secondary);
+            border: 1px solid transparent;
+        }
+        .tag-option:hover { background: var(--primary-light); }
+        .tag-option.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary-dark);
+        }
+        .tag-delete-btn:hover { opacity: 1 !important; color: #e74c3c; }
+        /* ===== Modal ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,40,0,0.4);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            max-width: 640px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 16px 48px rgba(0,80,40,0.15);
+        }
+        .modal h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        /* ===== Toast ===== */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            padding: 14px 24px;
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 300;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            animation: slideIn 0.3s ease;
+        }
+        .toast.success { background: var(--success); }
+        .toast.error { background: var(--danger); }
+        .toast.info { background: var(--primary-dark); }        @keyframes slideIn {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* ===== Loading ===== */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+        }
+        .spinner {
+            display: inline-block;
+            width: 32px; height: 32px;
+            border: 3px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 12px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .num { font-variant-numeric: tabular-nums; }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        /* ===== Summary report ===== */
+        .summary-card {
+            background: linear-gradient(135deg, #f0fdf4 0%, #fefce8 50%, #f0fdf4 100%);
+            border: 1px solid #d4edda;
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Genshin-inspired decorative element */
+        .summary-card::before {
+            content: '';
+            position: absolute;
+            top: -20px; right: -20px;
+            width: 120px; height: 120px;
+            background: radial-gradient(circle, rgba(0,200,83,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .summary-card::after {
+            content: '';
+            position: absolute;
+            bottom: -30px; left: -30px;
+            width: 100px; height: 100px;
+            background: radial-gradient(circle, rgba(255,0,0,0.04) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .summary-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .summary-header h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+        .summary-date {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-left: auto;
+        }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+        .summary-item {
+            background: rgba(255,255,255,0.7);
+            border-radius: 8px;
+            padding: 12px 16px;
+        }
+        .summary-item-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+        .summary-item-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .summary-highlight {
+            background: rgba(67,160,71,0.1);
+            border-left: 3px solid var(--primary);
+        }
+        .summary-new-badge {
+            display: inline-block;
+            padding: 1px 6px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 700;
+            background: var(--primary);
+            color: white;
+            margin-left: 4px;
+        }
+
+        /* ===== Refresh status ===== */
+        .refresh-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        .refresh-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+        }
+        .refresh-dot.stale { background: var(--warning); }
+        .refresh-dot.error { background: var(--danger); }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        /* ===== Tab switcher ===== */
+        .tab-switcher {
+            display: flex;
+            gap: 0;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border);
+        }
+        .tab-btn {
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border: none;
+            background: none;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s;
+        }
+        .tab-btn:hover { color: var(--primary-dark); }
+        .tab-btn.active {
+            color: var(--primary-dark);
+            border-bottom-color: var(--primary);
+        }
+
+        /* ===== Login overlay ===== */
+        .login-overlay {
+            display: flex;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                linear-gradient(135deg, rgba(0,30,20,0.72) 0%, rgba(0,60,40,0.55) 50%, rgba(20,40,60,0.72) 100%),
+                url('/starroad/assets/genshin-bg-login.png');
+            background-size: cover;
+            background-position: center;
+            z-index: 500;
+            align-items: center;
+            justify-content: center;
+        }
+        /* Decorative floating elements */
+        .login-overlay::before {
+            content: '';
+            position: absolute;
+            top: 10%; right: 15%;
+            width: 200px; height: 200px;
+            background: radial-gradient(circle, rgba(0,200,83,0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .login-overlay::after {
+            content: '';
+            position: absolute;
+            bottom: 10%; left: 15%;
+            width: 180px; height: 180px;
+            background: radial-gradient(circle, rgba(255,0,0,0.04) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .login-box {
+            background: rgba(255,255,255,0.86);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: 20px;
+            padding: 44px 40px;
+            max-width: 420px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0,20,10,0.35);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+        .login-box::before {
+            content: '';
+            display: block;
+            height: 4px;
+            background: linear-gradient(90deg, var(--yt-red) 0%, var(--yt-red) 35%, var(--primary) 35%, var(--primary) 70%, var(--genshin-gold) 70%, var(--genshin-gold) 100%);
+            border-radius: 2px;
+            margin: -44px -40px 24px;
+            border-radius: 20px 20px 0 0;
+        }
+        .login-box h2 {
+            color: var(--text);
+            margin-bottom: 8px;
+            font-size: 22px;
+            font-weight: 800;
+        }
+        .login-box p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+        .login-icon {
+            width: 72px; height: 72px;
+            border-radius: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            overflow: hidden;
+            background: var(--primary-light);
+            box-shadow: 0 4px 12px rgba(0,200,83,0.15);
+        }
+        .login-icon img { width: 100%; height: 100%; object-fit: contain; }
+
+        /* ===== Latest videos section ===== */
+        .latest-videos-section {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed var(--border);
+        }
+        .latest-video-item {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding: 6px 0;
+            font-size: 12px;
+        }
+        .latest-video-item img {
+            width: 60px;
+            height: 34px;
+            border-radius: 4px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .latest-video-item .lv-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .latest-video-item .lv-title {
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .latest-video-item .lv-meta {
+            color: var(--text-secondary);
+            font-size: 11px;
+        }
+
+        /* ===== Pagination ===== */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            margin-top: 20px;
+            padding: 12px 0;
+        }
+        .pagination button {
+            min-width: 36px;
+            height: 36px;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10px;
+        }
+        .pagination button:hover:not(:disabled) {
+            border-color: var(--primary);
+            color: var(--primary-dark);
+            background: var(--primary-light);
+        }
+        .pagination button.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .pagination button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .pagination-info {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-left: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== Login Overlay ===== -->
+<div class="login-overlay" id="login-overlay">
+    <div class="login-box">
+        <div class="login-icon"><img src="/starroad/assets/logo.png?v=2" alt="旭星" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=font-size:28px;font-weight:700;color:var(--primary)>旭</div>'"></div>
+        <h2>旭星-YouTube热点库</h2>
+        <p>热点内容追踪 & 创作者库</p>
+        <button class="btn btn-primary" style="width:100%;justify-content:center;font-size:16px;padding:14px;" onclick="enterAsGuest()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg>
+            前往浏览
+        </button>
+        <p style="font-size:13px;margin-top:16px;color:var(--text-secondary);">浏览热点内容、创作者库和趋势分析</p>
+        <div style="margin-top:24px;padding-top:16px;border-top:1px solid var(--border);">
+            <details style="text-align:left;">
+                <summary style="font-size:12px;color:var(--text-secondary);cursor:pointer;font-weight:600;user-select:none;">管理者登录 →</summary>
+                <div style="margin-top:12px;">
+                    <input type="email" class="form-input" id="login-email" placeholder="管理者Google邮箱..." style="text-align:center;font-size:13px;">
+                    <button class="btn btn-secondary btn-sm" style="width:100%;justify-content:center;margin-top:8px;" onclick="adminLogin()">管理者进入</button>
+                </div>
+            </details>
+        </div>
+        <label style="display:flex;align-items:center;gap:8px;margin-top:20px;cursor:pointer;user-select:none;font-size:12px;color:var(--text-secondary);">
+            <input type="checkbox" id="remember-login" style="width:16px;height:16px;accent-color:var(--primary);cursor:pointer;">
+            记住我的登录方式，下次自动进入
+        </label>
+    </div>
+</div>
+
+<!-- ===== Sidebar ===== -->
+<div class="sidebar">
+    <div class="sidebar-logo">
+        <div class="sidebar-logo-icon"><img src="/starroad/assets/logo.png?v=2" alt="logo" onerror="this.parentElement.innerHTML='<div style=font-size:20px;font-weight:700;color:var(--primary)>旭</div>'"></div>
+        <div>
+            <h1>旭星-YouTube热点库</h1>
+            <p>热点内容追踪 & 创作者库</p>
+        </div>
+    </div>
+    <div class="nav-section">
+        <div class="nav-item active" data-page="dashboard" onclick="navigateTo('dashboard')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            仪表盘
+        </div>
+        <div class="nav-item" data-page="trending" onclick="navigateTo('trending')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            热点内容
+        </div>
+        <div class="nav-section-label">创作者库</div>
+        <div class="nav-item" data-page="managed" onclick="navigateTo('managed')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 11l-3-3m0 6l3-3"/></svg>
+            在管创作者库
+        </div>
+        <div class="nav-item" data-page="reserve" onclick="navigateTo('reserve')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            创作者储备库
+        </div>
+        <div class="nav-section-label">分析</div>
+        <div class="nav-item" data-page="trends" onclick="navigateTo('trends')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg>
+            趋势分析
+        </div>
+        <div class="nav-item" data-page="search" onclick="navigateTo('search')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            搜索发现
+        </div>
+        <div class="nav-item nav-admin-only" data-page="settings" onclick="navigateTo('settings')" style="display:none;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            管理者后台
+        </div>
+    </div>
+    <div class="sidebar-footer">
+        <div class="admin-badge" id="admin-badge">
+            <div class="admin-dot"></div>
+            <span id="admin-email-display">未登录</span>
+        </div>
+        <button class="btn btn-secondary btn-sm" style="width:100%;justify-content:center;margin-bottom:6px;" onclick="logout()">切换账号</button>
+        <div style="text-align:center;font-size:10px;color:var(--text-secondary);opacity:0.5;padding-top:4px;">
+            <span style="color:var(--yt-red);font-weight:700;">▶</span> YouTube × 
+            <span style="color:var(--genshin-gold);font-weight:700;">✦</span> Genshin
+        </div>
+    </div>
+</div>
+
+<!-- ===== Main content ===== -->
+<div class="main">
+
+    <!-- ===== Dashboard ===== -->
+    <div class="page active" id="page-dashboard">
+        <div class="top-bar">
+            <div class="page-header">
+                <h2 style="display:flex;align-items:center;gap:10px;">
+                    <span style="display:inline-flex;width:32px;height:32px;background:var(--yt-red);border-radius:7px;align-items:center;justify-content:center;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+                    </span>
+                    仪表盘总览
+                </h2>
+                <p>旭星YouTube原神内容生态全览</p>
+            </div>
+            <div class="refresh-status" id="refresh-status">
+                <div class="refresh-dot"></div>
+                <span>加载中...</span>
+            </div>
+        </div>
+
+        <!-- Summary Report -->
+        <div class="summary-card" id="summary-card" style="display:none;">
+            <div class="summary-header">
+                <h3 style="display:flex;align-items:center;gap:8px;">
+                    <span style="display:inline-flex;width:24px;height:24px;background:var(--yt-red);border-radius:5px;align-items:center;justify-content:center;flex-shrink:0;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+                    </span>
+                    每日汇报总结
+                </h3>
+                <span class="summary-date" id="summary-date"></span>
+            </div>
+            <div id="summary-content"></div>
+        </div>
+
+        <div class="stats-grid" id="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon" style="background:var(--primary-light);color:var(--primary-dark);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                </div>
+                <div class="stat-info">
+                    <h3 class="num" id="stat-videos">-</h3>
+                    <p>追踪视频总数</p>
+                    <div class="stat-today" id="stat-videos-today"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background:#f0fdf4;color:#00a844;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 11l-3-3m0 6l3-3"/></svg>
+                </div>
+                <div class="stat-info">
+                    <h3 class="num" id="stat-managed">-</h3>
+                    <p>在管创作者</p>
+                    <div class="stat-today" id="stat-managed-today"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background:#f7fef9;color:#558b2f;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                </div>
+                <div class="stat-info">
+                    <h3 class="num" id="stat-reserve">-</h3>
+                    <p>储备创作者</p>
+                    <div class="stat-today" id="stat-reserve-today"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="card">
+                <h3 style="margin-bottom:16px;font-size:16px;display:flex;align-items:center;gap:8px;">
+                    <span style="color:var(--yt-red);">🔥</span> Top 5 热门视频
+                </h3>
+                <div id="dashboard-top-videos">
+                    <div class="loading"><div class="spinner"></div><p>加载中...</p></div>
+                </div>
+            </div>
+            <div class="card">
+                <h3 style="margin-bottom:16px;font-size:16px;display:flex;align-items:center;gap:8px;">
+                    <span style="color:var(--genshin-gold);">⭐</span> Top 5 创作者
+                </h3>
+                <div id="dashboard-top-creators">
+                    <div class="loading"><div class="spinner"></div><p>加载中...</p></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ===== Trending Videos ===== -->
+    <div class="page" id="page-trending">
+        <div class="page-header">
+            <h2 style="display:flex;align-items:center;gap:10px;">
+                <span style="display:inline-flex;width:32px;height:32px;background:var(--yt-red);border-radius:7px;align-items:center;justify-content:center;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+                </span>
+                热点内容排行
+            </h2>
+            <p>今日播放量增长 TOP3 + 本周热度排行，多维度排序浏览</p>
+        </div>
+
+        <!-- Section 1: Today's Hot TOP3 (Daily Growth) -->
+        <div class="card" style="margin-bottom:20px;">
+            <h3 style="margin-bottom:16px;font-size:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                <span style="color:var(--yt-red);">🚀</span> 今日热点
+                <span style="font-size:12px;color:var(--text-secondary);font-weight:400;margin-left:8px;" id="daily-growth-desc">近一周播放量增长最快的 3 个视频</span>
+                <span style="font-size:12px;color:var(--primary);font-weight:600;margin-left:auto;background:var(--primary-light);padding:3px 10px;border-radius:12px;" id="daily-growth-date"></span>
+            </h3>
+            <div id="daily-growth-content">
+                <div class="top3-empty">
+                    <div class="loading"><div class="spinner"></div><p>加载中...</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Weekly Hot Videos (BOTTOM) -->
+        <div class="card">
+            <div class="filters-bar" style="margin-bottom:0;">
+                <h3 style="margin:0;font-size:16px;display:flex;align-items:center;gap:8px;flex:1;">
+                    <span style="color:var(--primary);">🔥</span> 本周热榜
+                    <span style="font-size:12px;color:var(--text-secondary);font-weight:400;margin-left:8px;" id="video-count-label"></span>
+                </h3>
+                <input type="text" class="form-input" id="video-search" placeholder="搜索标题或频道..." oninput="onVideoFilterChange()" style="width:200px;">
+                <select class="form-select" id="video-sort" onchange="onVideoFilterChange()">
+                    <option value="view_count">按播放量排序</option>
+                    <option value="view_growth">按播放量增长排序</option>
+                    <option value="like_count">按点赞数排序</option>
+                    <option value="comment_count">按评论数排序</option>
+                    <option value="published_at">按发布日期排序</option>
+                </select>
+            </div>
+            <div class="table-wrapper" style="margin-top:12px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:40px;">#</th><th style="width:130px;">缩略图</th><th>标题</th><th>频道</th>
+                            <th style="width:100px;">播放量</th><th style="width:90px;">点赞</th><th style="width:90px;">评论</th><th style="width:110px;">日增</th><th style="width:100px;">发布时间</th>
+                        </tr>
+                    </thead>
+                    <tbody id="videos-tbody">
+                        <tr><td colspan="9"><div class="loading"><div class="spinner"></div><p>加载中...</p></div></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination" id="videos-pagination"></div>
+        </div>
+    </div>
+
+    <!-- ===== Managed Creators ===== -->
+    <div class="page" id="page-managed">
+        <div class="top-bar">
+            <div class="page-header">
+                <h2 style="display:flex;align-items:center;gap:10px;">
+                    <span style="display:inline-flex;width:32px;height:32px;background:linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);border-radius:7px;align-items:center;justify-content:center;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 11l-3-3m0 6l3-3"/></svg>
+                    </span>
+                    在管创作者库
+                </h2>
+                <p>已签约或重点跟踪的创作者，由管理员手动添加</p>
+            </div>
+            <div id="managed-add-btn-container"></div>
+        </div>
+        <div class="filters-bar">
+            <input type="text" class="form-input" id="managed-search" placeholder="搜索创作者..." oninput="loadManagedCreators()">
+            <select class="form-select" id="managed-sort" onchange="loadManagedCreators()">
+                <option value="subscriber_count">按订阅数排序</option>
+                <option value="view_count">按总播放量排序</option>
+                <option value="video_count">按视频数排序</option>
+            </select>
+            <select class="form-select" id="managed-filter-tag" onchange="loadManagedCreators()">
+                <option value="">全部一级标签</option>
+            </select>
+            <select class="form-select" id="managed-filter-secondary" onchange="loadManagedCreators()">
+                <option value="">全部二级标签</option>
+            </select>
+            <select class="form-select" id="managed-filter-region" onchange="loadManagedCreators()">
+                <option value="">全部区域</option>
+                <option value="欧区">欧区</option>
+                <option value="美区">美区</option>
+            </select>
+            <select class="form-select" id="managed-filter-language" onchange="loadManagedCreators()">
+                <option value="">全部语言</option>
+            </select>
+        </div>
+        <div id="managed-list">
+            <div class="loading"><div class="spinner"></div><p>加载中...</p></div>
+        </div>
+        <div class="pagination" id="managed-pagination"></div>
+    </div>
+
+    <!-- ===== Reserve Creators ===== -->
+    <div class="page" id="page-reserve">
+        <div class="top-bar">
+            <div class="page-header">
+                <h2 style="display:flex;align-items:center;gap:10px;">
+                    <span style="display:inline-flex;width:32px;height:32px;background:linear-gradient(135deg, var(--genshin-blue) 0%, #3da4d0 100%);border-radius:7px;align-items:center;justify-content:center;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                    </span>
+                    创作者储备库
+                </h2>
+                <p>自动发现的潜力创作者，可提升为在管创作者</p>
+            </div>
+            <div id="reserve-add-btn-container"></div>
+        </div>
+        <div class="filters-bar">
+            <input type="text" class="form-input" id="reserve-search" placeholder="搜索创作者..." oninput="loadReserveCreators()">
+            <select class="form-select" id="reserve-sort" onchange="loadReserveCreators()">
+                <option value="subscriber_count">按订阅数排序</option>
+                <option value="view_count">按总播放量排序</option>
+                <option value="video_count">按视频数排序</option>
+            </select>
+            <select class="form-select" id="reserve-filter-tag" onchange="loadReserveCreators()">
+                <option value="">全部一级标签</option>
+            </select>
+            <select class="form-select" id="reserve-filter-secondary" onchange="loadReserveCreators()">
+                <option value="">全部二级标签</option>
+            </select>
+            <select class="form-select" id="reserve-filter-region" onchange="loadReserveCreators()">
+                <option value="">全部区域</option>
+                <option value="欧区">欧区</option>
+                <option value="美区">美区</option>
+            </select>
+            <select class="form-select" id="reserve-filter-language" onchange="loadReserveCreators()">
+                <option value="">全部语言</option>
+            </select>
+        </div>
+        <div id="reserve-list">
+            <div class="loading"><div class="spinner"></div><p>加载中...</p></div>
+        </div>
+        <div class="pagination" id="reserve-pagination"></div>
+    </div>
+
+    <!-- ===== Trends ===== -->
+    <div class="page" id="page-trends">
+        <div class="page-header">
+            <h2 style="display:flex;align-items:center;gap:10px;">
+                <span style="display:inline-flex;width:32px;height:32px;background:linear-gradient(135deg, var(--genshin-gold) 0%, #b8902f 100%);border-radius:7px;align-items:center;justify-content:center;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg>
+                </span>
+                趋势分析
+            </h2>
+            <p>储备创作者增长趋势与频道类型分布</p>
+        </div>
+
+        <div class="grid-2">
+            <div class="card">
+                <h3 style="margin-bottom:16px;font-size:16px;">📊 每周新增储备创作者</h3>
+                <div class="chart-container"><canvas id="chart-weekly-reserve"></canvas></div>
+            </div>
+            <div class="card">
+                <h3 style="margin-bottom:16px;font-size:16px;">📈 每月新增储备创作者</h3>
+                <div class="chart-container"><canvas id="chart-monthly-reserve"></canvas></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 style="margin-bottom:16px;font-size:16px;">🏷️ 储备创作者频道类型分布</h3>
+            <div class="chart-container"><canvas id="chart-reserve-tags"></canvas></div>
+        </div>
+    </div>
+
+    <!-- ===== Search & Discover ===== -->
+    <div class="page" id="page-search">
+        <div class="page-header">
+            <h2 style="display:flex;align-items:center;gap:10px;">
+                <span style="display:inline-flex;width:32px;height:32px;background:linear-gradient(135deg, var(--genshin-purple) 0%, #7b57c4 100%);border-radius:7px;align-items:center;justify-content:center;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                </span>
+                搜索发现
+            </h2>
+            <p>搜索YouTube视频和频道，发现新内容和新创作者</p>
+        </div>
+        <div class="card" style="margin-bottom:16px;">
+            <div style="display:flex;gap:12px;align-items:center;">
+                <input type="text" class="form-input" id="search-query" placeholder="输入搜索关键词..." style="flex:1;" value="Genshin Impact">
+                <select class="form-select" id="search-type" style="width:140px;">
+                    <option value="videos">视频</option>
+                    <option value="channels">频道</option>
+                </select>
+                <button class="btn btn-primary" onclick="performSearch()">搜索</button>
+            </div>
+        </div>
+        <div id="search-results">
+            <div class="card" style="text-align:center;padding:40px;color:var(--text-secondary);">
+                <p style="font-size:16px;">输入关键词开始搜索</p>
+                <p style="font-size:13px;margin-top:8px;">搜索结果可直接添加到在管创作者库或视频追踪</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Settings ===== -->
+    <div class="page" id="page-settings">
+        <div class="page-header">
+            <h2 style="display:flex;align-items:center;gap:10px;">
+                <span style="display:inline-flex;width:32px;height:32px;background:linear-gradient(135deg, #607d8b 0%, #455a64 100%);border-radius:7px;align-items:center;justify-content:center;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                </span>
+                设置 & 数据刷新
+            </h2>
+            <p>管理数据刷新、管理员权限和自动刷新设置</p>
+        </div>
+        <div class="grid-2">
+            <div class="card">
+                <h3 style="margin-bottom:16px;font-size:16px;">🔄 手动刷新</h3>
+                <p style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">立即从YouTube API获取最新数据。每日自动刷新时间为 10:20。</p>
+                <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                    <button class="btn btn-primary" onclick="triggerRefresh()" id="btn-refresh">刷新全部数据</button>
+                    <button class="btn btn-secondary" onclick="triggerDiscover()">发现新创作者</button>
+                    <button class="btn btn-secondary" onclick="triggerDedup()">查重清理</button>
+                </div>
+            </div>
+            <div class="card">
+                <h3 style="margin-bottom:16px;font-size:16px;">📋 刷新历史</h3>
+                <div id="refresh-history" style="max-height:200px;overflow-y:auto;">
+                    <div class="loading"><div class="spinner"></div><p>加载中...</p></div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <h3 style="margin-bottom:16px;font-size:16px;">🔐 管理员管理</h3>
+            <div id="admin-list-display" style="margin-bottom:16px;"></div>
+            <div id="admin-add-section" style="display:none;">
+                <div style="display:flex;gap:12px;align-items:center;">
+                    <input type="email" class="form-input" id="new-admin-email" placeholder="输入新管理员邮箱..." style="flex:1;">
+                    <button class="btn btn-primary btn-sm" onclick="addNewAdmin()">添加管理员</button>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <h3 style="margin-bottom:16px;font-size:16px;">⚙️ 自动刷新配置</h3>
+            <p style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">
+                每日 <strong style="color:var(--primary-dark);">10:20</strong> 自动刷新YouTube原神热点内容和创作者数据（Windows任务计划程序执行）。
+            </p>
+            <div class="grid-2">
+                <div>
+                    <p style="font-size:13px;margin-bottom:8px;"><strong>搜索关键词：</strong></p>
+                    <div id="keywords-list" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
+                </div>
+                <div>
+                    <p style="font-size:13px;margin-bottom:8px;"><strong>标签体系：</strong></p>
+                    <p style="font-size:12px;color:var(--text-secondary);margin-bottom:4px;">一级标签（内容方向）：</p>
+                    <div id="primary-tags-display" style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px;"></div>
+                    <p style="font-size:12px;color:var(--text-secondary);margin-bottom:4px;">二级标签（内容细分）：</p>
+                    <div id="secondary-tags-display" style="display:flex;flex-wrap:wrap;gap:4px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== Add Creator Modal ===== -->
+<div class="modal-overlay" id="modal-add-creator">
+    <div class="modal">
+        <h3>添加在管创作者</h3>
+        <div class="form-group">
+            <label class="form-label">频道ID或链接 *</label>
+            <input type="text" class="form-input" id="creator-input" placeholder="频道ID / youtube.com/@handle / youtube.com/channel/UC...">
+            <p style="font-size:12px;color:var(--text-secondary);margin-top:4px;">支持频道ID、频道URL、@handle链接</p>
+        </div>
+        <div class="form-group">
+            <label class="form-label">区域</label>
+            <select class="form-select" id="creator-region">
+                <option value="">自动检测</option>
+                <option value="欧区">欧区</option>
+                <option value="美区">美区</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-label">语言</label>
+            <select class="form-select" id="creator-language">
+                <option value="">自动检测</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-label">备注</label>
+            <textarea class="form-textarea" id="creator-notes" placeholder="添加备注信息，如：签约状态、合作意向..."></textarea>
+        </div>
+        <div class="form-group">
+            <label class="form-label">特殊标记</label>
+            <input type="text" class="form-input" id="creator-custom-notes" placeholder="特殊标记，如：重点关注、高优先级...">
+        </div>
+        <div class="form-group">
+            <label class="form-label">一级标签（内容方向）</label>
+            <div class="tag-selector" id="primary-tag-selector"></div>
+        </div>
+        <div class="form-group">
+            <label class="form-label">二级标签（内容细分）</label>
+            <div class="tag-selector" id="secondary-tag-selector"></div>
+        </div>
+        <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:20px;">
+            <button class="btn btn-secondary" onclick="closeModal('modal-add-creator')">取消</button>
+            <button class="btn btn-primary" onclick="submitAddCreator()">确认添加</button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== Add Reserve Creator Modal ===== -->
+<div class="modal-overlay" id="modal-add-reserve">
+    <div class="modal">
+        <h3>添加储备创作者</h3>
+        <div class="form-group">
+            <label class="form-label">频道ID或链接 *</label>
+            <input type="text" class="form-input" id="reserve-creator-input" placeholder="频道ID / youtube.com/@handle / youtube.com/channel/UC...">
+            <p style="font-size:12px;color:var(--text-secondary);margin-top:4px;">支持频道ID、频道URL、@handle链接</p>
+        </div>
+        <div class="form-group">
+            <label class="form-label">区域</label>
+            <select class="form-select" id="reserve-creator-region">
+                <option value="">自动检测</option>
+                <option value="欧区">欧区</option>
+                <option value="美区">美区</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-label">语言</label>
+            <select class="form-select" id="reserve-creator-language">
+                <option value="">自动检测</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-label">备注</label>
+            <textarea class="form-textarea" id="reserve-creator-notes" placeholder="添加备注信息，如：人工发现、重点关注..."></textarea>
+        </div>
+        <div class="form-group">
+            <label class="form-label">特殊标记</label>
+            <input type="text" class="form-input" id="reserve-creator-custom-notes" placeholder="特殊标记，如：重点关注、高优先级...">
+        </div>
+        <div class="form-group">
+            <label class="form-label">一级标签（内容方向）</label>
+            <div class="tag-selector" id="reserve-primary-tag-selector"></div>
+        </div>
+        <div class="form-group">
+            <label class="form-label">二级标签（内容细分）</label>
+            <div class="tag-selector" id="reserve-secondary-tag-selector"></div>
+        </div>
+        <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:20px;">
+            <button class="btn btn-secondary" onclick="closeModal('modal-add-reserve')">取消</button>
+            <button class="btn btn-primary" onclick="submitAddReserveCreator()">确认添加</button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== Edit Creator Modal ===== -->
+<div class="modal-overlay" id="modal-edit-creator">
+    <div class="modal">
+        <h3>编辑创作者信息</h3>
+        <input type="hidden" id="edit-channel-id">
+        <input type="hidden" id="edit-creator-type">
+        <div class="form-group">
+            <label class="form-label">创作者</label>
+            <p id="edit-creator-name" style="font-weight:600;color:var(--primary-dark);"></p>
+        </div>
+        <div class="form-group">
+            <label class="form-label">区域</label>
+            <select class="form-select" id="edit-creator-region">
+                <option value="">未设置</option>
+                <option value="欧区">欧区</option>
+                <option value="美区">美区</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-label">语言</label>
+            <select class="form-select" id="edit-creator-language">
+                <option value="">未设置</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-label">备注</label>
+            <textarea class="form-textarea" id="edit-creator-notes" placeholder="添加备注..."></textarea>
+        </div>
+        <div class="form-group">
+            <label class="form-label">特殊标记</label>
+            <input type="text" class="form-input" id="edit-creator-custom-notes" placeholder="特殊标记...">
+        </div>
+        <div class="form-group">
+            <label class="form-label">一级标签（内容方向）</label>
+            <div class="tag-selector" id="edit-primary-tag-selector"></div>
+        </div>
+        <div class="form-group">
+            <label class="form-label">二级标签（内容细分）</label>
+            <div class="tag-selector" id="edit-secondary-tag-selector"></div>
+        </div>
+        <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:20px;">
+            <button class="btn btn-secondary" onclick="closeModal('modal-edit-creator')">取消</button>
+            <button class="btn btn-primary" onclick="submitEditCreator()">保存修改</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ===== State =====
+let currentPage = 'dashboard';
+let charts = {};
+let isAdmin = false;
+let adminEmail = '';
+let platformConfig = null;
+let selectedPrimaryTags = [];
+let selectedSecondaryTags = [];
+let editPrimaryTags = [];
+let editSecondaryTags = [];
+let managedLatestVideos = {}; // Cache for managed creator latest videos
+let managedPage = 1;
+let reservePage = 1;
+const PAGE_SIZE = 10;
+
+const PRIMARY_TAGS = ["资讯","反应","攻略","玩法","杂谈","剪辑","二创","其他才艺"];
+const SECONDARY_TAGS = [
+    "内容反应","新闻简讯","游戏试玩","角色攻略","深渊攻略","大世界收集",
+    "养成挑战","尘歌壶搭建","特殊命题挑战","设定解析","美术、音乐赏析",
+    "杂谈/吐槽","排行","AMV(现有素材)","EXE/ネタ","彩蛋挖掘","摄影","填词",
+    "插画","MMD","AMV(原创素材)","cosplay"
+];
+const REGION_TAGS = ["欧区", "美区"];
+const LANGUAGE_OPTIONS = ["英语", "日语", "中文", "韩语", "法语", "德语", "西班牙语", "葡萄牙语", "俄语", "其他"];
+
+// Custom tags persisted in localStorage
+let CUSTOM_PRIMARY_TAGS = [];
+let CUSTOM_SECONDARY_TAGS = [];
+function loadCustomTags() {
+    try {
+        CUSTOM_PRIMARY_TAGS = JSON.parse(localStorage.getItem('custom_primary_tags') || '[]');
+        CUSTOM_SECONDARY_TAGS = JSON.parse(localStorage.getItem('custom_secondary_tags') || '[]');
+    } catch(e) { CUSTOM_PRIMARY_TAGS = []; CUSTOM_SECONDARY_TAGS = []; }
+}
+function saveCustomTags() {
+    localStorage.setItem('custom_primary_tags', JSON.stringify(CUSTOM_PRIMARY_TAGS));
+    localStorage.setItem('custom_secondary_tags', JSON.stringify(CUSTOM_SECONDARY_TAGS));
+}
+loadCustomTags();
+function getAllPrimaryTags() { return [...PRIMARY_TAGS, ...CUSTOM_PRIMARY_TAGS]; }
+function getAllSecondaryTags() { return [...SECONDARY_TAGS, ...CUSTOM_SECONDARY_TAGS]; }
+function isCustomPrimaryTag(t) { return CUSTOM_PRIMARY_TAGS.includes(t); }
+function isCustomSecondaryTag(t) { return CUSTOM_SECONDARY_TAGS.includes(t); }
+
+// ===== Admin Login =====
+async function adminLogin() {
+    const email = document.getElementById('login-email').value.trim();
+    if (!email) { showToast('请输入邮箱', 'error'); return; }
+    try {
+        const resp = await fetch('/api/admin/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+        });
+        const data = await resp.json();
+        if (data.success) {
+            isAdmin = true;
+            adminEmail = email;
+            localStorage.setItem('adminEmail', email);
+            if (document.getElementById('remember-login').checked) {
+                localStorage.setItem('loginMode', 'admin');
+            } else {
+                localStorage.removeItem('loginMode');
+            }
+            document.getElementById('login-overlay').style.display = 'none';
+            updateAdminBadge();
+            initApp();
+        } else {
+            showToast('该邮箱不是管理员', 'error');
+        }
+    } catch (e) {
+        showToast('登录失败', 'error');
+    }
+}
+
+function enterAsGuest() {
+    isAdmin = false;
+    adminEmail = '';
+    if (document.getElementById('remember-login').checked) {
+        localStorage.setItem('loginMode', 'guest');
+    } else {
+        localStorage.removeItem('loginMode');
+    }
+    document.getElementById('login-overlay').style.display = 'none';
+    updateAdminBadge();
+    initApp();
+}
+
+function logout() {
+    localStorage.removeItem('adminEmail');
+    localStorage.removeItem('loginMode');
+    isAdmin = false;
+    adminEmail = '';
+    document.getElementById('login-overlay').style.display = 'flex';
+    document.getElementById('login-email').value = '';
+    document.getElementById('remember-login').checked = false;
+}
+
+function updateAdminBadge() {
+    const badge = document.getElementById('admin-badge');
+    const display = document.getElementById('admin-email-display');
+    const adminNavItems = document.querySelectorAll('.nav-admin-only');
+    if (isAdmin && adminEmail) {
+        badge.classList.remove('not-admin');
+        display.textContent = adminEmail;
+        adminNavItems.forEach(el => el.style.display = '');
+    } else {
+        badge.classList.add('not-admin');
+        display.textContent = '访客模式';
+        adminNavItems.forEach(el => el.style.display = 'none');
+    }
+}
+
+async function tryAutoLogin() {
+    const loginMode = localStorage.getItem('loginMode');
+
+    // If user chose to remember as guest, auto-enter as guest
+    if (loginMode === 'guest') {
+        isAdmin = false;
+        adminEmail = '';
+        document.getElementById('login-overlay').style.display = 'none';
+        updateAdminBadge();
+        initApp();
+        return;
+    }
+
+    // If user chose to remember as admin, try auto-login with saved email
+    if (loginMode === 'admin') {
+        const savedEmail = localStorage.getItem('adminEmail');
+        if (savedEmail) {
+            try {
+                const resp = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: savedEmail })
+                });
+                const data = await resp.json();
+                if (data.success) {
+                    isAdmin = true;
+                    adminEmail = savedEmail;
+                    document.getElementById('login-overlay').style.display = 'none';
+                    updateAdminBadge();
+                    initApp();
+                    return;
+                }
+            } catch (e) {}
+        }
+    }
+
+    // No remembered choice, or admin auto-login failed — show login page
+    // Pre-fill email if previously saved
+    const savedEmail = localStorage.getItem('adminEmail');
+    if (savedEmail) {
+        document.getElementById('login-email').value = savedEmail;
+    }
+    document.getElementById('login-overlay').style.display = 'flex';
+}
+
+// ===== Init app =====
+function initApp() {
+    loadConfig();
+    loadDashboard();
+    populateTagFilters();
+}
+
+async function loadConfig() {
+    try {
+        const resp = await fetch('/api/config');
+        platformConfig = await resp.json();
+    } catch (e) { console.error(e); }
+}
+
+function populateTagFilters() {
+    // Primary tag filters (preset + custom)
+    ['managed-filter-tag', 'reserve-filter-tag'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            getAllPrimaryTags().forEach(t => {
+                const opt = document.createElement('option');
+                opt.value = t; opt.textContent = t;
+                el.appendChild(opt);
+            });
+        }
+    });
+    // Secondary tag filters (preset + custom)
+    ['managed-filter-secondary', 'reserve-filter-secondary'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            getAllSecondaryTags().forEach(t => {
+                const opt = document.createElement('option');
+                opt.value = t; opt.textContent = t;
+                el.appendChild(opt);
+            });
+        }
+    });
+    // Language filters
+    ['managed-filter-language', 'reserve-filter-language'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            LANGUAGE_OPTIONS.forEach(t => {
+                const opt = document.createElement('option');
+                opt.value = t; opt.textContent = t;
+                el.appendChild(opt);
+            });
+        }
+    });
+    // Add creator modal language
+    const addLang = document.getElementById('creator-language');
+    if (addLang) {
+        LANGUAGE_OPTIONS.forEach(t => {
+            const opt = document.createElement('option');
+            opt.value = t; opt.textContent = t;
+            addLang.appendChild(opt);
+        });
+    }
+    const editLang = document.getElementById('edit-creator-language');
+    if (editLang) {
+        LANGUAGE_OPTIONS.forEach(t => {
+            const opt = document.createElement('option');
+            opt.value = t; opt.textContent = t;
+            editLang.appendChild(opt);
+        });
+    }
+    // Settings page tags display
+    const ptDisplay = document.getElementById('primary-tags-display');
+    const stDisplay = document.getElementById('secondary-tags-display');
+    if (ptDisplay) ptDisplay.innerHTML = PRIMARY_TAGS.map(t => `<span class="badge badge-primary-tag">${t}</span>`).join('');
+    if (stDisplay) stDisplay.innerHTML = SECONDARY_TAGS.map(t => `<span class="badge badge-secondary-tag">${t}</span>`).join('');
+}
+
+// ===== Navigation =====
+function navigateTo(page) {
+    // Block settings page for non-admins
+    if (page === 'settings' && !isAdmin) {
+        showToast('需要管理者权限才可查看', 'error');
+        return;
+    }
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+    const navItem = document.querySelector(`.nav-item[data-page="${page}"]`);
+    if (navItem) navItem.classList.add('active');
+    currentPage = page;
+    if (page === 'dashboard') loadDashboard();
+    if (page === 'trending') loadTrendingVideos();
+    if (page === 'managed') loadManagedCreators();
+    if (page === 'reserve') loadReserveCreators();
+    if (page === 'trends') loadTrends();
+    if (page === 'settings') loadSettings();
+}
+
+// ===== Utilities =====
+function formatNumber(n) {
+    if (!n) return '0';
+    if (n >= 1e9) return (n / 1e9).toFixed(1) + 'B';
+    if (n >= 1e6) return (n / 1e6).toFixed(1) + 'M';
+    if (n >= 1e3) return (n / 1e3).toFixed(1) + 'K';
+    return n.toString();
+}
+
+function formatDate(iso) {
+    if (!iso) return '-';
+    const d = new Date(iso);
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+}
+
+function formatDateShort(iso) {
+    if (!iso) return '-';
+    const d = new Date(iso);
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function timeAgo(iso) {
+    if (!iso) return '-';
+    const diff = Date.now() - new Date(iso).getTime();
+    const hours = Math.floor(diff / 3600000);
+    const days = Math.floor(diff / 86400000);
+    if (days > 0) return `${days}天前`;
+    if (hours > 0) return `${hours}小时前`;
+    const mins = Math.floor(diff / 60000);
+    return `${mins}分钟前`;
+}
+
+function showToast(message, type = 'info') {
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+}
+
+function regionBadgeClass(region) {
+    const map = { '欧区': 'badge-region-eu', '美区': 'badge-region-us', '亚区': 'badge-region-asia', '其他': 'badge-region-other' };
+    return map[region] || 'badge-region-other';
+}
+
+function isAddedToday(addedAt) {
+    if (!addedAt) return false;
+    const today = new Date();
+    const todayStr = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+    return addedAt.substring(0, 10) === todayStr;
+}
+
+async function api(url, options = {}) {
+    try {
+        if (!options.headers) options.headers = {};
+        if (isAdmin) options.headers['X-Admin-Email'] = adminEmail;
+        const resp = await fetch(url, options);
+        const data = await resp.json();
+        if (!resp.ok) throw new Error(data.error || `HTTP ${resp.status}`);
+        return data;
+    } catch (e) {
+        showToast(e.message, 'error');
+        throw e;
+    }
+}
+
+// ===== Dashboard =====
+async function loadDashboard() {
+    try {
+        const data = await api('/api/dashboard');
+
+        document.getElementById('stat-videos').textContent = formatNumber(data.total_videos);
+        document.getElementById('stat-managed').textContent = formatNumber(data.total_managed_creators);
+        document.getElementById('stat-reserve').textContent = formatNumber(data.total_reserve_creators);
+
+        // Weekly new badges - replacing today's new to avoid redundancy with summary
+        const weeklyNew = data.summary?.weekly_new || {};
+        const videosTodayEl = document.getElementById('stat-videos-today');
+        const managedTodayEl = document.getElementById('stat-managed-today');
+        const reserveTodayEl = document.getElementById('stat-reserve-today');
+
+        const wnVideo = weeklyNew.videos || 0;
+        const wnManaged = weeklyNew.managed || 0;
+        const wnReserve = weeklyNew.reserve || 0;
+
+        videosTodayEl.innerHTML = `<span class="stat-today-badge ${wnVideo > 0 ? 'has-new' : ''}">本周新增 +${wnVideo}</span>`;
+        managedTodayEl.innerHTML = `<span class="stat-today-badge ${wnManaged > 0 ? 'has-new' : ''}">本周新增 +${wnManaged}</span>`;
+        reserveTodayEl.innerHTML = `<span class="stat-today-badge ${wnReserve > 0 ? 'has-new' : ''}">本周新增 +${wnReserve}</span>`;
+
+        // Update refresh status indicator
+        const lastRefresh = data.last_refresh;
+        if (lastRefresh) {
+            const statusEl = document.getElementById('refresh-status');
+            if (statusEl) {
+                const dot = statusEl.querySelector('.refresh-dot');
+                const text = statusEl.querySelector('span');
+                const refreshDate = new Date(lastRefresh.timestamp);
+                const hoursAgo = (Date.now() - refreshDate.getTime()) / 3600000;
+                if (hoursAgo > 24) {
+                    dot.classList.add('stale');
+                    text.textContent = `上次刷新: ${Math.floor(hoursAgo)}小时前`;
+                } else {
+                    text.textContent = `上次刷新: ${formatDate(lastRefresh.timestamp)}`;
+                }
+            }
+        }
+
+        if (data.summary) {
+            renderSummary(data.summary);
+        }
+
+        const videosHtml = data.top_videos.map((v, i) => `
+            <div style="display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);">
+                <span style="font-size:18px;font-weight:700;color:var(--primary-dark);width:28px;">#${i+1}</span>
+                <img src="${v.thumbnail || ''}" style="width:80px;height:45px;border-radius:4px;object-fit:cover;" onerror="this.style.display='none'">
+                <div style="flex:1;min-width:0;">
+                    <p style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${v.title || ''}</p>
+                    <p style="font-size:12px;color:var(--text-secondary);">${v.channel_title || ''} · 👁 ${formatNumber(v.view_count)}</p>
+                </div>
+            </div>
+        `).join('');
+        document.getElementById('dashboard-top-videos').innerHTML = videosHtml || '<p style="color:var(--text-secondary);text-align:center;padding:20px;">暂无数据</p>';
+
+        const creatorsHtml = data.top_creators.map((c, i) => `
+            <div style="display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);">
+                <span style="font-size:18px;font-weight:700;color:var(--primary-dark);width:28px;">#${i+1}</span>
+                <img src="${c.thumbnail || ''}" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" onerror="this.style.display='none'">
+                <div style="flex:1;min-width:0;">
+                    <p style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${c.title || ''}</p>
+                    <p style="font-size:12px;color:var(--text-secondary);">👥 ${formatNumber(c.subscriber_count)} · 👁 ${formatNumber(c.view_count)}</p>
+                </div>
+            </div>
+        `).join('');
+        document.getElementById('dashboard-top-creators').innerHTML = creatorsHtml || '<p style="color:var(--text-secondary);text-align:center;padding:20px;">暂无数据</p>';
+    } catch (e) { console.error('Dashboard error:', e); }
+}
+
+function renderSummary(summary) {
+    const card = document.getElementById('summary-card');
+    const content = document.getElementById('summary-content');
+    const dateEl = document.getElementById('summary-date');
+
+    card.style.display = 'block';
+    dateEl.textContent = `汇报日期: ${summary.report_date}`;
+
+    const todayNew = summary.today_new || {};
+    const tnReserve = todayNew.reserve || 0;
+    const tnManaged = todayNew.managed || 0;
+    const tnVideos = todayNew.videos || 0;
+
+    const topVideo = summary.top_video || {};
+    const videoUrl = topVideo.video_id ? `https://www.youtube.com/watch?v=${topVideo.video_id}` : '#';
+    const videoLink = topVideo.video_id ?
+        `<a href="${videoUrl}" target="_blank" style="color:var(--primary-dark);text-decoration:none;font-weight:600;">${topVideo.title || '暂无'}
+         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;vertical-align:middle;margin-left:2px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>`
+        : `<span style="font-weight:600;">${topVideo.title || '暂无'}</span>`;
+
+    content.innerHTML = `
+        <div class="summary-grid">
+            <div class="summary-item summary-highlight">
+                <div class="summary-item-label">🔥 今日最热视频</div>
+                <div class="summary-item-value" style="font-size:14px;">${videoLink}</div>
+                <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">${topVideo.channel || ''} · ${formatNumber(topVideo.views)} 播放</div>
+            </div>
+            <div class="summary-item">
+                <div class="summary-item-label">📦 今日新增储备</div>
+                <div class="summary-item-value" style="font-size:22px;color:var(--primary);">${tnReserve} <span style="font-size:14px;color:var(--text-secondary);">位创作者</span></div>
+                <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">在管新增 ${tnManaged} · 视频新增 ${tnVideos}</div>
+            </div>
+        </div>
+    `;
+}
+
+function renderDashboardTrendChart(history) {
+    const ctx = document.getElementById('dashboard-trend-chart');
+    if (!ctx) return;
+    if (charts.dashboard) charts.dashboard.destroy();
+    const labels = history.map(h => h.date);
+    const videoData = history.map(h => h.total_videos);
+    const creatorData = history.map(h => (h.creator_snapshots || []).length);
+    const managedData = history.map(h => (h.managed_snapshots || []).length);
+    charts.dashboard = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                { label: '追踪视频', data: videoData, borderColor: '#00c853', backgroundColor: 'rgba(0,200,83,0.1)', tension: 0.3, yAxisID: 'y' },
+                { label: '储备创作者', data: creatorData, borderColor: '#00e676', backgroundColor: 'rgba(0,230,118,0.1)', tension: 0.3, yAxisID: 'y1' },
+                { label: '在管创作者', data: managedData, borderColor: '#00a844', backgroundColor: 'rgba(0,168,68,0.1)', tension: 0.3, yAxisID: 'y1' }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            scales: {
+                y: { type: 'linear', position: 'left', title: { display: true, text: '视频数' } },
+                y1: { type: 'linear', position: 'right', title: { display: true, text: '创作者数' }, grid: { drawOnChartArea: false } }
+            }
+        }
+    });
+}
+
+// ===== Videos =====
+let allTrendingVideos = [];
+let videoPage = 1;
+const VIDEOS_PER_PAGE = 10;
+
+function onVideoFilterChange() {
+    videoPage = 1;
+    renderVideoTable();
+}
+
+async function loadTrendingVideos() {
+    try {
+        const data = await api('/api/videos/trending');
+        allTrendingVideos = data.all_videos || [];
+
+        // Section 1: Today's Hot TOP3 (Daily Growth)
+        const growthContent = document.getElementById('daily-growth-content');
+        const growthDesc = document.getElementById('daily-growth-desc');
+        const growthDate = document.getElementById('daily-growth-date');
+        // Show today's date
+        const now = new Date();
+        const dateStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+        if (growthDate) growthDate.textContent = `📊 ${dateStr} 数据`;
+
+        if (!data.has_growth_data) {
+            growthDesc.textContent = '首次运行暂无增长数据，下次刷新后可用';
+            growthContent.innerHTML = `
+                <div class="top3-empty">
+                    <p style="font-size:15px;font-weight:500;margin-bottom:8px;">暂无每日增长数据</p>
+                    <p style="font-size:13px;">首次运行需要在两次刷新之间才能计算日增播放量。<br>下次自动刷新时间为 10:20，或点击下方按钮立即刷新。</p>
+                    <button class="btn btn-primary" style="margin-top:16px;" onclick="triggerRefresh()">🔄 刷新数据</button>
+                </div>
+            `;
+        } else if (data.daily_growth.length === 0) {
+            growthContent.innerHTML = `
+                <div class="top3-empty">
+                    <p>近一周暂无视频数据</p>
+                </div>
+            `;
+        } else {
+            const top3 = data.daily_growth.slice(0, 3);
+            growthDesc.textContent = `近一周播放量增长最快的 3 个视频`;
+            growthContent.innerHTML = `
+                <div class="top3-grid">
+                    ${top3.map((v, i) => {
+                        const growth = v.view_growth || 0;
+                        const prevCount = v.previous_view_count || 0;
+                        const currCount = v.view_count || 0;
+                        const growthRate = prevCount > 0 ? ((growth / prevCount) * 100).toFixed(1) : '0.0';
+                        const rankClass = i === 0 ? 'top3-rank-1' : i === 1 ? 'top3-rank-2' : 'top3-rank-3';
+                        const rankEmoji = i === 0 ? '🥇' : i === 1 ? '🥈' : '🥉';
+                        const isEstimated = v._growth_type === 'estimated';
+                        const growthLabel = isEstimated ? `日均 ${formatNumber(v._growth_score || 0)}` : `+${formatNumber(growth)} 日增`;
+                        const newBadge = isEstimated ? '<span style="font-size:10px;background:var(--primary-light);color:var(--primary-dark);padding:2px 6px;border-radius:4px;margin-left:6px;">🆕 新发现</span>' : '';
+                        const thirdStat = isEstimated ? `发布${v._days_since || '?'}天` : `+${growthRate}%`;
+                        return `
+                        <div class="top3-card">
+                            <div class="top3-rank ${rankClass}">${rankEmoji}</div>
+                            <a href="https://www.youtube.com/watch?v=${v.video_id}" target="_blank">
+                                <img src="${v.thumbnail || ''}" class="top3-thumb" onerror="this.style.display='none'">
+                            </a>
+                            <div class="top3-title">
+                                <a href="https://www.youtube.com/watch?v=${v.video_id}" target="_blank" style="color:var(--text);text-decoration:none;">${v.title || 'N/A'}</a>
+                                ${newBadge}
+                            </div>
+                            <div class="top3-channel">${v.channel_title || '-'}</div>
+                            <div class="top3-stats">
+                                <div class="top3-stat top3-stat-growth">${growthLabel}</div>
+                                <div class="top3-stat">${formatNumber(currCount)} 播放</div>
+                                <div class="top3-stat">${thirdStat}</div>
+                                <div class="top3-stat">👍 ${formatNumber(v.like_count || 0)}</div>
+                            </div>
+                        </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+        }
+
+        renderVideoTable();
+    } catch (e) { console.error('Trending error:', e); }
+}
+
+function renderVideoTable() {
+    const sortKey = document.getElementById('video-sort')?.value || 'view_count';
+    const searchQuery = document.getElementById('video-search')?.value?.toLowerCase() || '';
+
+    let videos = [...allTrendingVideos];
+
+    // Filter by search
+    if (searchQuery) {
+        videos = videos.filter(v =>
+            (v.title || '').toLowerCase().includes(searchQuery) ||
+            (v.channel_title || '').toLowerCase().includes(searchQuery)
+        );
+    }
+
+    // Sort
+    videos.sort((a, b) => {
+        let va, vb;
+        if (sortKey === 'published_at') {
+            va = new Date(a.published_at || 0).getTime();
+            vb = new Date(b.published_at || 0).getTime();
+        } else if (sortKey === 'view_growth') {
+            va = a.view_growth || 0;
+            vb = b.view_growth || 0;
+        } else {
+            va = a[sortKey] || 0;
+            vb = b[sortKey] || 0;
+        }
+        return vb - va;
+    });
+
+    // Update count label
+    const countLabel = document.getElementById('video-count-label');
+    if (countLabel) countLabel.textContent = `共 ${videos.length} 个视频`;
+
+    // Paginate
+    const totalPages = Math.ceil(videos.length / VIDEOS_PER_PAGE) || 1;
+    if (videoPage > totalPages) videoPage = totalPages;
+    const start = (videoPage - 1) * VIDEOS_PER_PAGE;
+    const pageVideos = videos.slice(start, start + VIDEOS_PER_PAGE);
+
+    const tbody = document.getElementById('videos-tbody');
+    if (pageVideos.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:40px;color:var(--text-secondary);">暂无视频数据</td></tr>';
+    } else {
+        tbody.innerHTML = pageVideos.map((v, i) => {
+            const growth = v.view_growth || 0;
+            const growthHtml = growth > 0
+                ? `<td class="num" style="font-weight:600;color:${growth > 100000 ? 'var(--yt-red)' : 'var(--primary)'};">+${formatNumber(growth)}</td>`
+                : '<td class="num" style="color:var(--text-secondary);">-</td>';
+            return `
+            <tr>
+                <td style="font-weight:700;color:var(--primary-dark);">${start + i + 1}</td>
+                <td><img src="${v.thumbnail || ''}" class="video-thumb" onerror="this.style.display='none'"></td>
+                <td style="max-width:300px;">
+                    <a href="https://www.youtube.com/watch?v=${v.video_id}" target="_blank" style="color:var(--text);text-decoration:none;font-weight:500;">${v.title || 'N/A'}</a>
+                    ${v.is_manual ? '<span class="badge badge-green" style="margin-left:6px;">手动</span>' : ''}
+                </td>
+                <td>${v.channel_title || '-'}</td>
+                <td class="num" style="font-weight:600;color:var(--primary-dark);">${formatNumber(v.view_count)}</td>
+                <td class="num">${formatNumber(v.like_count)}</td>
+                <td class="num">${formatNumber(v.comment_count)}</td>
+                ${growthHtml}
+                <td style="font-size:13px;color:var(--text-secondary);">${formatDateShort(v.published_at)}</td>
+            </tr>
+            `;
+        }).join('');
+    }
+
+    // Render pagination
+    renderPagination('videos-pagination', videoPage, totalPages, videos.length, (p) => {
+        videoPage = p;
+        renderVideoTable();
+    });
+}
+
+// ===== Managed Creators =====
+async function loadManagedCreators() {
+    const search = document.getElementById('managed-search')?.value || '';
+    const sort = document.getElementById('managed-sort')?.value || 'subscriber_count';
+    const tag = document.getElementById('managed-filter-tag')?.value || '';
+    const secondary = document.getElementById('managed-filter-secondary')?.value || '';
+    const region = document.getElementById('managed-filter-region')?.value || '';
+    const language = document.getElementById('managed-filter-language')?.value || '';
+    let url = `/api/creators/managed?sort=${sort}`;
+    if (tag) url += `&tag=${encodeURIComponent(tag)}`;
+    if (secondary) url += `&secondary=${encodeURIComponent(secondary)}`;
+    if (region) url += `&region=${encodeURIComponent(region)}`;
+    if (language) url += `&language=${encodeURIComponent(language)}`;
+    try {
+        const data = await api(url);
+        const btnContainer = document.getElementById('managed-add-btn-container');
+        btnContainer.innerHTML = isAdmin ? `<button class="btn btn-primary" onclick="showAddCreatorModal()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>添加在管创作者</button>` : '';
+
+        const container = document.getElementById('managed-list');
+        let filtered = data.creators;
+        if (search) {
+            const s = search.toLowerCase();
+            filtered = filtered.filter(c => (c.title || '').toLowerCase().includes(s) || (c.description || '').toLowerCase().includes(s));
+        }
+        if (filtered.length === 0) {
+            container.innerHTML = `<div class="card" style="text-align:center;padding:40px;color:var(--text-secondary);"><p>在管创作者库暂无数据</p>${isAdmin ? '<p style="font-size:13px;margin-top:8px;">点击"添加在管创作者"手动添加</p>' : ''}</div>`;
+            document.getElementById('managed-pagination').innerHTML = '';
+            return;
+        }
+
+        // Pagination
+        const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
+        if (managedPage > totalPages) managedPage = 1;
+        const start = (managedPage - 1) * PAGE_SIZE;
+        const pageItems = filtered.slice(start, start + PAGE_SIZE);
+
+        container.innerHTML = pageItems.map(c => renderCreatorCard(c, 'managed')).join('');
+        renderPagination('managed-pagination', managedPage, totalPages, filtered.length, (p) => { managedPage = p; loadManagedCreators(); });
+
+        // Fetch latest videos for each managed creator on current page
+        pageItems.forEach(c => {
+            if (c.channel_id) fetchLatestVideos(c.channel_id);
+        });
+    } catch (e) { console.error(e); }
+}
+
+async function fetchLatestVideos(channelId) {
+    try {
+        const data = await fetch(`/api/creators/managed/${channelId}/latest-videos?max_results=1`);
+        const result = await data.json();
+        if (result.videos) {
+            managedLatestVideos[channelId] = result.videos;
+            const container = document.getElementById(`latest-videos-${channelId}`);
+            if (container) {
+                if (result.videos.length === 0) {
+                    container.innerHTML = '<p style="font-size:12px;color:var(--text-secondary);">暂无最新视频</p>';
+                } else {
+                    container.innerHTML = result.videos.slice(0, 1).map(v => `
+                        <div class="latest-video-item">
+                            <img src="${v.thumbnail || ''}" onerror="this.style.display='none'">
+                            <div class="lv-info">
+                                <div class="lv-title"><a href="https://www.youtube.com/watch?v=${v.video_id}" target="_blank" style="color:var(--text);text-decoration:none;">${v.title || ''}</a></div>
+                                <div class="lv-meta">${timeAgo(v.published_at)}${v.view_count !== undefined ? ' · 👁 ' + formatNumber(v.view_count) : ''}</div>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            }
+        }
+    } catch (e) { /* silent */ }
+}
+
+// ===== Reserve Creators =====
+async function loadReserveCreators() {
+    const search = document.getElementById('reserve-search')?.value || '';
+    const sort = document.getElementById('reserve-sort')?.value || 'subscriber_count';
+    const tag = document.getElementById('reserve-filter-tag')?.value || '';
+    const secondary = document.getElementById('reserve-filter-secondary')?.value || '';
+    const region = document.getElementById('reserve-filter-region')?.value || '';
+    const language = document.getElementById('reserve-filter-language')?.value || '';
+    let url = `/api/creators/reserve?sort=${sort}`;
+    if (tag) url += `&tag=${encodeURIComponent(tag)}`;
+    if (secondary) url += `&secondary=${encodeURIComponent(secondary)}`;
+    if (region) url += `&region=${encodeURIComponent(region)}`;
+    if (language) url += `&language=${encodeURIComponent(language)}`;
+    try {
+        const data = await api(url);
+        const container = document.getElementById('reserve-list');
+        // Show add button for admin
+        const addBtn = document.getElementById('reserve-add-btn-container');
+        if (addBtn) addBtn.innerHTML = isAdmin ? `<button class="btn btn-primary" onclick="showAddReserveModal()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>添加储备创作者</button>` : '';
+
+        let filtered = data.creators;
+        if (search) {
+            const s = search.toLowerCase();
+            filtered = filtered.filter(c => (c.title || '').toLowerCase().includes(s) || (c.description || '').toLowerCase().includes(s));
+        }
+        if (filtered.length === 0) {
+            container.innerHTML = `<div class="card" style="text-align:center;padding:40px;color:var(--text-secondary);"><p>储备创作者库暂无数据</p>${isAdmin ? '<p style="font-size:13px;margin-top:8px;">点击右上角"添加储备创作者"手动添加，或运行"发现新创作者"自动发现</p>' : '<p style="font-size:13px;margin-top:8px;">运行"发现新创作者"可自动从热门视频中提取频道</p>'}</div>`;
+            document.getElementById('reserve-pagination').innerHTML = '';
+            return;
+        }
+
+        // Sort: today's new creators first, then by selected sort
+        filtered.sort((a, b) => {
+            const aNew = isAddedToday(a.added_at) ? 1 : 0;
+            const bNew = isAddedToday(b.added_at) ? 1 : 0;
+            if (aNew !== bNew) return bNew - aNew;
+            // Same newness, apply selected sort descending
+            return (b[sort] || 0) - (a[sort] || 0);
+        });
+        const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
+        if (reservePage > totalPages) reservePage = 1;
+        const start = (reservePage - 1) * PAGE_SIZE;
+        const pageItems = filtered.slice(start, start + PAGE_SIZE);
+
+        container.innerHTML = pageItems.map(c => renderCreatorCard(c, 'reserve')).join('');
+        renderPagination('reserve-pagination', reservePage, totalPages, filtered.length, (p) => { reservePage = p; loadReserveCreators(); });
+    } catch (e) { console.error(e); }
+}
+
+function renderPagination(containerId, currentPage, totalPages, totalItems, onPageChange) {
+    const container = document.getElementById(containerId);
+    if (!container || totalPages <= 1) {
+        if (container) container.innerHTML = `<span class="pagination-info">共 ${totalItems} 个</span>`;
+        return;
+    }
+    let html = '';
+    html += `<button onclick="void(0)" ${currentPage === 1 ? 'disabled' : ''} data-page="${currentPage - 1}">‹</button>`;
+    // Show up to 7 page buttons
+    let startPage = Math.max(1, currentPage - 3);
+    let endPage = Math.min(totalPages, startPage + 6);
+    if (endPage - startPage < 6) startPage = Math.max(1, endPage - 6);
+    if (startPage > 1) html += `<button data-page="1">1</button>`;
+    if (startPage > 2) html += `<span style="padding:0 4px;color:var(--text-secondary);">...</span>`;
+    for (let i = startPage; i <= endPage; i++) {
+        html += `<button class="${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+    }
+    if (endPage < totalPages - 1) html += `<span style="padding:0 4px;color:var(--text-secondary);">...</span>`;
+    if (endPage < totalPages) html += `<button data-page="${totalPages}">${totalPages}</button>`;
+    html += `<button ${currentPage === totalPages ? 'disabled' : ''} data-page="${currentPage + 1}">›</button>`;
+    html += `<span class="pagination-info">共 ${totalItems} 个 · 第 ${currentPage}/${totalPages} 页</span>`;
+    container.innerHTML = html;
+    container.querySelectorAll('button[data-page]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const p = parseInt(btn.dataset.page);
+            if (p >= 1 && p <= totalPages && p !== currentPage) onPageChange(p);
+        });
+    });
+}
+
+function renderCreatorCard(c, type) {
+    const primaryTagBadges = (c.primary_tags || []).map(t => `<span class="badge badge-primary-tag" style="margin-left:4px;">${t}</span>`).join('');
+    const secondaryTagBadges = (c.secondary_tags || []).map(t => `<span class="badge badge-secondary-tag" style="margin-left:4px;">${t}</span>`).join('');
+    const managedBadge = type === 'managed' ? '<span class="badge badge-green">在管</span>' : '<span class="badge badge-teal">储备</span>';
+    const regionBadge = c.region_tag ? `<span class="badge ${regionBadgeClass(c.region_tag)}">${c.region_tag}</span>` : '';
+    const langBadge = c.language ? `<span class="badge badge-lang">${c.language}</span>` : '';
+    const countryBadge = c.country ? `<span class="badge badge-blue">${c.country}</span>` : '';
+
+    // Today new highlight for reserve creators
+    const isNewToday = type === 'reserve' && isAddedToday(c.added_at);
+    const newTodayBadge = isNewToday ? '<span class="badge-today-new">🆕 今日新增</span>' : '';
+    const manualBadge = (type === 'reserve' && c.is_manual) ? '<span class="badge badge-blue" style="margin-left:4px;">📝 手动添加</span>' : '';
+    const cardClass = isNewToday ? 'card creator-card-new' : 'card';
+
+    // Daily change indicators
+    let dailyChangeHtml = '';
+    if (c.daily_sub_change !== undefined && c.daily_sub_change !== 0) {
+        const cls = c.daily_sub_change > 0 ? 'up' : 'down';
+        const sign = c.daily_sub_change > 0 ? '+' : '';
+        dailyChangeHtml += `<span class="daily-change ${cls}">订阅 ${sign}${formatNumber(c.daily_sub_change)}</span> `;
+    }
+    if (c.daily_view_change !== undefined && c.daily_view_change !== 0) {
+        const cls = c.daily_view_change > 0 ? 'up' : 'down';
+        const sign = c.daily_view_change > 0 ? '+' : '';
+        dailyChangeHtml += `<span class="daily-change ${cls}">播放 ${sign}${formatNumber(c.daily_view_change)}</span>`;
+    }
+
+    let actionButtons = '';
+    if (type === 'managed' && isAdmin) {
+        actionButtons = `
+            <button class="btn btn-secondary btn-sm" onclick="showEditCreatorModal('${c.channel_id}', 'managed')">编辑</button>
+            <button class="btn btn-danger btn-sm" onclick="removeManagedCreator('${c.channel_id}', '${(c.title || '').replace(/'/g, '')}')">删除</button>
+        `;
+    } else if (type === 'reserve' && isAdmin) {
+        actionButtons = `
+            <button class="btn btn-primary btn-sm" onclick="promoteCreator('${c.channel_id}', '${(c.title || '').replace(/'/g, '')}')">提升为在管</button>
+            <button class="btn btn-secondary btn-sm" onclick="showEditCreatorModal('${c.channel_id}', 'reserve')">编辑</button>
+            <button class="btn btn-danger btn-sm" onclick="removeReserveCreator('${c.channel_id}', '${(c.title || '').replace(/'/g, '')}')">删除</button>
+        `;
+    }
+
+    // Latest videos section for managed creators (only 1 video)
+    let latestVideosHtml = '';
+    if (type === 'managed') {
+        latestVideosHtml = `
+            <div class="latest-videos-section">
+                <p style="font-size:12px;font-weight:600;color:var(--primary-dark);margin-bottom:4px;">🎬 频道最新视频</p>
+                <div id="latest-videos-${c.channel_id}">
+                    <p style="font-size:12px;color:var(--text-secondary);">加载中...</p>
+                </div>
+            </div>
+        `;
+    }
+
+    return `
+        <div class="${cardClass}">
+            <div class="creator-card">
+                <img src="${c.thumbnail || ''}" class="channel-avatar" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 48 48%22><rect fill=%22%23e8f5e9%22 width=%2248%22 height=%2248%22/><text x=%2224%22 y=%2230%22 text-anchor=%22middle%22 fill=%22%232e7d32%22 font-size=%2220%22>?</text></svg>'">
+                <div class="creator-info">
+                    <h4>
+                        <a href="https://www.youtube.com/channel/${c.channel_id}" target="_blank" style="color:var(--text);text-decoration:none;">${c.title || 'Unknown'}</a>
+                        ${newTodayBadge} ${manualBadge} ${managedBadge} ${regionBadge} ${langBadge} ${countryBadge}
+                    </h4>
+                    <p>${c.description || '暂无描述'}</p>
+                    <div class="creator-stats">
+                        <div class="creator-stat">👥 订阅: <strong>${formatNumber(c.subscriber_count)}</strong></div>
+                        <div class="creator-stat">👁 总播放: <strong>${formatNumber(c.view_count)}</strong></div>
+                        <div class="creator-stat">🎬 视频: <strong>${formatNumber(c.video_count)}</strong></div>
+                    </div>
+                    ${dailyChangeHtml ? `<div class="creator-stats">${dailyChangeHtml}</div>` : ''}
+                    <div style="margin-top:6px;">
+                        ${primaryTagBadges ? `<span style="font-size:11px;color:var(--text-secondary);">一级:</span> ${primaryTagBadges}` : ''}
+                        ${secondaryTagBadges ? `<br><span style="font-size:11px;color:var(--text-secondary);">二级:</span> ${secondaryTagBadges}` : ''}
+                    </div>
+                    ${c.notes ? `<p style="font-size:12px;color:var(--text-secondary);margin-top:6px;font-style:italic;">📝 ${c.notes}</p>` : ''}
+                    ${c.custom_notes ? `<p style="font-size:12px;color:var(--warning);margin-top:4px;font-weight:600;">⚡ ${c.custom_notes}</p>` : ''}
+                    ${latestVideosHtml}
+                    ${actionButtons ? `<div style="display:flex;gap:8px;margin-top:10px;">${actionButtons}</div>` : ''}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// ===== Tag selectors for modals =====
+function renderTagSelector(containerId, tags, selected) {
+    const container = document.getElementById(containerId);
+    // Merge preset tags with any custom tags already selected
+    const allTags = getTagsForContainer(containerId);
+    // Also include any selected tags that aren't in the list (edge case)
+    const extraSelected = selected.filter(t => !allTags.includes(t));
+    const fullList = [...allTags, ...extraSelected];
+    container.innerHTML = fullList.map(t => {
+        const isCustom = isCustomPrimaryTag(t) || isCustomSecondaryTag(t) || extraSelected.includes(t);
+        const escaped = t.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+        const deleteBtn = isCustom ? `<span class="tag-delete-btn" onclick="event.stopPropagation();deleteCustomTag('${containerId}','${escaped}')" style="margin-left:4px;cursor:pointer;font-weight:bold;opacity:0.6;">&times;</span>` : '';
+        return `
+        <div class="tag-option ${selected.includes(t) ? 'selected' : ''}" onclick="toggleTag('${containerId}', '${escaped}')">${isCustom ? '✎ ' : ''}${t}${deleteBtn}</div>
+        `;
+    }).join('') + `
+        <div class="tag-custom-input" style="display:inline-flex;align-items:center;gap:4px;">
+            <input type="text" class="form-input" id="${containerId}-custom-input" placeholder="自定义标签..." style="width:120px;padding:4px 8px;font-size:13px;height:30px;" onkeypress="if(event.key==='Enter'){event.preventDefault();addCustomTag('${containerId}');}">
+            <button type="button" class="btn btn-secondary" style="padding:4px 10px;font-size:13px;height:30px;" onclick="addCustomTag('${containerId}')">+</button>
+        </div>
+    `;
+}
+
+function addCustomTag(containerId) {
+    const input = document.getElementById(containerId + '-custom-input');
+    if (!input) return;
+    const tag = input.value.trim();
+    if (!tag) return;
+
+    let selected;
+    if (containerId === 'primary-tag-selector') selected = selectedPrimaryTags;
+    else if (containerId === 'secondary-tag-selector') selected = selectedSecondaryTags;
+    else if (containerId === 'edit-primary-tag-selector') selected = editPrimaryTags;
+    else if (containerId === 'edit-secondary-tag-selector') selected = editSecondaryTags;
+    else if (containerId === 'reserve-primary-tag-selector') selected = reserveSelectedPrimaryTags;
+    else if (containerId === 'reserve-secondary-tag-selector') selected = reserveSelectedSecondaryTags;
+
+    if (!selected) return;
+
+    // Persist to localStorage
+    const isPrimary = containerId.includes('primary');
+    if (isPrimary) {
+        if (!CUSTOM_PRIMARY_TAGS.includes(tag)) {
+            CUSTOM_PRIMARY_TAGS.push(tag);
+            saveCustomTags();
+            refreshAllTagFilters();
+        }
+    } else {
+        if (!CUSTOM_SECONDARY_TAGS.includes(tag)) {
+            CUSTOM_SECONDARY_TAGS.push(tag);
+            saveCustomTags();
+            refreshAllTagFilters();
+        }
+    }
+
+    if (!selected.includes(tag)) selected.push(tag);
+    input.value = '';
+
+    renderTagSelector(containerId, getTagsForContainer(containerId), selected);
+    const newInput = document.getElementById(containerId + '-custom-input');
+    if (newInput) newInput.focus();
+}
+
+function toggleTag(containerId, tag) {
+    let selected;
+    if (containerId === 'primary-tag-selector') selected = selectedPrimaryTags;
+    else if (containerId === 'secondary-tag-selector') selected = selectedSecondaryTags;
+    else if (containerId === 'edit-primary-tag-selector') selected = editPrimaryTags;
+    else if (containerId === 'edit-secondary-tag-selector') selected = editSecondaryTags;
+    else if (containerId === 'reserve-primary-tag-selector') selected = reserveSelectedPrimaryTags;
+    else if (containerId === 'reserve-secondary-tag-selector') selected = reserveSelectedSecondaryTags;
+
+    const idx = selected.indexOf(tag);
+    if (idx >= 0) selected.splice(idx, 1);
+    else selected.push(tag);
+
+    renderTagSelector(containerId, getTagsForContainer(containerId), selected);
+}
+
+function getTagsForContainer(id) {
+    if (id.includes('primary')) return getAllPrimaryTags();
+    return getAllSecondaryTags();
+}
+
+function deleteCustomTag(containerId, tag) {
+    // Remove from custom tag lists
+    const isPrimary = containerId.includes('primary');
+    if (isPrimary) {
+        CUSTOM_PRIMARY_TAGS = CUSTOM_PRIMARY_TAGS.filter(t => t !== tag);
+    } else {
+        CUSTOM_SECONDARY_TAGS = CUSTOM_SECONDARY_TAGS.filter(t => t !== tag);
+    }
+    saveCustomTags();
+
+    // Remove from all selected arrays
+    selectedPrimaryTags = selectedPrimaryTags.filter(t => t !== tag);
+    selectedSecondaryTags = selectedSecondaryTags.filter(t => t !== tag);
+    editPrimaryTags = editPrimaryTags.filter(t => t !== tag);
+    editSecondaryTags = editSecondaryTags.filter(t => t !== tag);
+    reserveSelectedPrimaryTags = reserveSelectedPrimaryTags.filter(t => t !== tag);
+    reserveSelectedSecondaryTags = reserveSelectedSecondaryTags.filter(t => t !== tag);
+
+    // Refresh dropdown filters and tag selectors
+    refreshAllTagFilters();
+    renderTagSelector(containerId, getTagsForContainer(containerId), getSelectedForContainer(containerId));
+    showToast(`已删除自定义标签"${tag}"`, 'success');
+}
+
+function getSelectedForContainer(containerId) {
+    if (containerId === 'primary-tag-selector') return selectedPrimaryTags;
+    if (containerId === 'secondary-tag-selector') return selectedSecondaryTags;
+    if (containerId === 'edit-primary-tag-selector') return editPrimaryTags;
+    if (containerId === 'edit-secondary-tag-selector') return editSecondaryTags;
+    if (containerId === 'reserve-primary-tag-selector') return reserveSelectedPrimaryTags;
+    if (containerId === 'reserve-secondary-tag-selector') return reserveSelectedSecondaryTags;
+    return [];
+}
+
+function refreshAllTagFilters() {
+    // Rebuild primary tag filter dropdowns
+    ['managed-filter-tag', 'reserve-filter-tag'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const current = el.value;
+        el.innerHTML = '<option value="">全部一级标签</option>';
+        getAllPrimaryTags().forEach(t => {
+            const opt = document.createElement('option');
+            opt.value = t; opt.textContent = t;
+            el.appendChild(opt);
+        });
+        el.value = current;
+    });
+    // Rebuild secondary tag filter dropdowns
+    ['managed-filter-secondary', 'reserve-filter-secondary'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const current = el.value;
+        el.innerHTML = '<option value="">全部二级标签</option>';
+        getAllSecondaryTags().forEach(t => {
+            const opt = document.createElement('option');
+            opt.value = t; opt.textContent = t;
+            el.appendChild(opt);
+        });
+        el.value = current;
+    });
+}
+
+// ===== Add Creator Modal =====
+function showAddCreatorModal() {
+    if (!isAdmin) { showToast('需要管理员权限', 'error'); return; }
+    document.getElementById('modal-add-creator').classList.add('active');
+    document.getElementById('creator-input').value = '';
+    document.getElementById('creator-notes').value = '';
+    document.getElementById('creator-custom-notes').value = '';
+    document.getElementById('creator-region').value = '';
+    document.getElementById('creator-language').value = '';
+    selectedPrimaryTags = [];
+    selectedSecondaryTags = [];
+    renderTagSelector('primary-tag-selector', PRIMARY_TAGS, selectedPrimaryTags);
+    renderTagSelector('secondary-tag-selector', SECONDARY_TAGS, selectedSecondaryTags);
+}
+
+async function submitAddCreator() {
+    const input = document.getElementById('creator-input').value.trim();
+    const notes = document.getElementById('creator-notes').value.trim();
+    const customNotes = document.getElementById('creator-custom-notes').value.trim();
+    const region = document.getElementById('creator-region').value;
+    const language = document.getElementById('creator-language').value;
+    if (!input) { showToast('请输入频道ID或链接', 'error'); return; }
+    try {
+        const data = await api('/api/creators/add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                channel_id: input, notes: notes, custom_notes: customNotes,
+                primary_tags: selectedPrimaryTags,
+                secondary_tags: selectedSecondaryTags,
+                region_tag: region, language: language
+            })
+        });
+        showToast(`已添加在管创作者: ${data.creator.title}`, 'success');
+        closeModal('modal-add-creator');
+        loadManagedCreators();
+    } catch (e) { console.error(e); }
+}
+
+// ===== Add Reserve Creator Modal =====
+let reserveSelectedPrimaryTags = [];
+let reserveSelectedSecondaryTags = [];
+
+function showAddReserveModal() {
+    if (!isAdmin) { showToast('需要管理员权限', 'error'); return; }
+    document.getElementById('modal-add-reserve').classList.add('active');
+    document.getElementById('reserve-creator-input').value = '';
+    document.getElementById('reserve-creator-notes').value = '';
+    document.getElementById('reserve-creator-custom-notes').value = '';
+    document.getElementById('reserve-creator-region').value = '';
+    document.getElementById('reserve-creator-language').value = '';
+    reserveSelectedPrimaryTags = [];
+    reserveSelectedSecondaryTags = [];
+    renderTagSelector('reserve-primary-tag-selector', PRIMARY_TAGS, reserveSelectedPrimaryTags);
+    renderTagSelector('reserve-secondary-tag-selector', SECONDARY_TAGS, reserveSelectedSecondaryTags);
+}
+
+async function submitAddReserveCreator() {
+    const input = document.getElementById('reserve-creator-input').value.trim();
+    const notes = document.getElementById('reserve-creator-notes').value.trim();
+    const customNotes = document.getElementById('reserve-creator-custom-notes').value.trim();
+    const region = document.getElementById('reserve-creator-region').value;
+    const language = document.getElementById('reserve-creator-language').value;
+    if (!input) { showToast('请输入频道ID或链接', 'error'); return; }
+    try {
+        const data = await api('/api/creators/reserve/add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                channel_id: input, notes: notes, custom_notes: customNotes,
+                primary_tags: reserveSelectedPrimaryTags,
+                secondary_tags: reserveSelectedSecondaryTags,
+                region_tag: region, language: language
+            })
+        });
+        showToast(`已添加储备创作者: ${data.creator.title}`, 'success');
+        closeModal('modal-add-reserve');
+        loadReserveCreators();
+    } catch (e) { console.error(e); }
+}
+
+// ===== Remove Reserve Creator =====
+async function removeReserveCreator(channelId, name) {
+    if (!isAdmin) return;
+    if (!confirm(`确认从储备库删除 "${name}"？\n\n删除后该创作者将不再出现在储备库中，但不会影响YouTube频道本身。`)) return;
+    try {
+        await api(`/api/creators/reserve/${channelId}`, { method: 'DELETE' });
+        showToast('已从储备库删除', 'success');
+        loadReserveCreators();
+    } catch (e) { console.error(e); }
+}
+
+// ===== Edit Creator Modal =====
+async function showEditCreatorModal(channelId, type) {
+    if (!isAdmin) return;
+    try {
+        const url = type === 'managed' ? `/api/creators/managed/${channelId}` : `/api/creators/reserve/${channelId}`;
+        const data = await api(url);
+        document.getElementById('edit-channel-id').value = channelId;
+        document.getElementById('edit-creator-type').value = type;
+        document.getElementById('edit-creator-name').textContent = data.title || 'Unknown';
+        document.getElementById('edit-creator-notes').value = data.notes || '';
+        document.getElementById('edit-creator-custom-notes').value = data.custom_notes || '';
+        document.getElementById('edit-creator-region').value = data.region_tag || '';
+        document.getElementById('edit-creator-language').value = data.language || '';
+        editPrimaryTags = data.primary_tags || [];
+        editSecondaryTags = data.secondary_tags || [];
+        renderTagSelector('edit-primary-tag-selector', PRIMARY_TAGS, editPrimaryTags);
+        renderTagSelector('edit-secondary-tag-selector', SECONDARY_TAGS, editSecondaryTags);
+        document.getElementById('modal-edit-creator').classList.add('active');
+    } catch (e) { console.error(e); }
+}
+
+async function submitEditCreator() {
+    const channelId = document.getElementById('edit-channel-id').value;
+    const type = document.getElementById('edit-creator-type').value;
+    const notes = document.getElementById('edit-creator-notes').value.trim();
+    const customNotes = document.getElementById('edit-creator-custom-notes').value.trim();
+    const region = document.getElementById('edit-creator-region').value;
+    const language = document.getElementById('edit-creator-language').value;
+    try {
+        const url = type === 'managed' ? `/api/creators/managed/${channelId}` : `/api/creators/reserve/${channelId}`;
+        await api(url, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                notes: notes, custom_notes: customNotes,
+                primary_tags: editPrimaryTags,
+                secondary_tags: editSecondaryTags,
+                region_tag: region, language: language
+            })
+        });
+        showToast('创作者信息已更新', 'success');
+        closeModal('modal-edit-creator');
+        if (type === 'managed') loadManagedCreators();
+        else loadReserveCreators();
+    } catch (e) { console.error(e); }
+}
+
+// ===== Promote / Remove =====
+async function promoteCreator(channelId, name) {
+    if (!isAdmin) return;
+    if (!confirm(`确认将 "${name}" 提升为在管创作者？`)) return;
+    try {
+        const data = await api(`/api/creators/promote/${channelId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({})
+        });
+        showToast(`已提升为在管: ${data.creator.title}`, 'success');
+        loadReserveCreators();
+    } catch (e) { console.error(e); }
+}
+
+async function removeManagedCreator(channelId, name) {
+    if (!isAdmin) return;
+    if (!confirm(`确认删除在管创作者 "${name}"？`)) return;
+    try {
+        await api(`/api/creators/managed/${channelId}`, { method: 'DELETE' });
+        showToast('创作者已删除', 'success');
+        loadManagedCreators();
+    } catch (e) { console.error(e); }
+}
+
+// ===== Trends =====
+async function loadTrends() {
+    try {
+        const reserveGrowth = await api('/api/trends/reserve-growth');
+
+        // Weekly chart
+        if (reserveGrowth.weekly && reserveGrowth.weekly.length > 0) {
+            renderBarChart('chart-weekly-reserve', reserveGrowth.weekly.map(w => w.date), reserveGrowth.weekly.map(w => w.new_creators), '每周新增储备创作者', '#00c853');
+        } else {
+            document.getElementById('chart-weekly-reserve').parentElement.innerHTML = '<p style="text-align:center;color:var(--text-secondary);padding:40px;">暂无数据</p>';
+        }
+
+        // Monthly chart
+        if (reserveGrowth.monthly && reserveGrowth.monthly.length > 0) {
+            renderBarChart('chart-monthly-reserve', reserveGrowth.monthly.map(m => m.date), reserveGrowth.monthly.map(m => m.new_creators), '每月新增储备创作者', '#00a844');
+        } else {
+            document.getElementById('chart-monthly-reserve').parentElement.innerHTML = '<p style="text-align:center;color:var(--text-secondary);padding:40px;">暂无数据</p>';
+        }
+
+        // Tag distribution pie chart
+        if (reserveGrowth.tag_distribution && Object.keys(reserveGrowth.tag_distribution).length > 0) {
+            renderPieChart('chart-reserve-tags', reserveGrowth.tag_distribution, '频道类型分布');
+        } else {
+            document.getElementById('chart-reserve-tags').parentElement.innerHTML = '<p style="text-align:center;color:var(--text-secondary);padding:40px;">暂无数据</p>';
+        }
+    } catch (e) { console.error(e); }
+}
+
+function renderBarChart(canvasId, labels, data, label, color) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+    if (charts[canvasId]) charts[canvasId].destroy();
+    charts[canvasId] = new Chart(ctx, {
+        type: 'bar',
+        data: { labels, datasets: [{ label, data, backgroundColor: color, borderRadius: 6 }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: 'top' } }, scales: { y: { beginAtZero: true } } }
+    });
+}
+
+function renderPieChart(canvasId, distribution, title) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+    if (charts[canvasId]) charts[canvasId].destroy();
+    const colors = ['#00c853', '#00e676', '#00a844', '#4ec2f1', '#d4a843', '#9b6dd7', '#1b5e20', '#69f0ae'];
+    charts[canvasId] = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: Object.keys(distribution),
+            datasets: [{ data: Object.values(distribution), backgroundColor: colors.slice(0, Object.keys(distribution).length) }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: 'right' } } }
+    });
+}
+
+function renderTrendChart(canvasId, labels, data, label, color) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+    if (charts[canvasId]) charts[canvasId].destroy();
+    charts[canvasId] = new Chart(ctx, {
+        type: 'line',
+        data: { labels, datasets: [{ label, data, borderColor: color, backgroundColor: color + '20', fill: true, tension: 0.3, pointRadius: 4, pointHoverRadius: 6 }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: 'top' } }, scales: { y: { beginAtZero: false } } }
+    });
+}
+
+function renderMultiTrendChart(canvasId, labels, datasets) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+    if (charts[canvasId]) charts[canvasId].destroy();
+    charts[canvasId] = new Chart(ctx, {
+        type: 'line',
+        data: { labels, datasets: datasets.map(d => ({ label: d.label, data: d.data, borderColor: d.color, backgroundColor: d.color + '20', tension: 0.3, pointRadius: 3 })) },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: 'top' } }, scales: { y: { beginAtZero: false } } }
+    });
+}
+
+// ===== Search =====
+async function performSearch() {
+    const query = document.getElementById('search-query').value.trim();
+    const type = document.getElementById('search-type').value;
+    if (!query) { showToast('请输入搜索关键词', 'error'); return; }
+    const resultsDiv = document.getElementById('search-results');
+    resultsDiv.innerHTML = '<div class="card"><div class="loading"><div class="spinner"></div><p>搜索中...</p></div></div>';
+    try {
+        const data = await api(`/api/search/${type}?q=${encodeURIComponent(query)}&max=20`);
+        if (type === 'videos') {
+            if (!data.videos || data.videos.length === 0) {
+                resultsDiv.innerHTML = '<div class="card" style="text-align:center;padding:40px;color:var(--text-secondary);"><p>未找到相关视频</p></div>';
+                return;
+            }
+            resultsDiv.innerHTML = `<div class="card"><p style="margin-bottom:16px;font-size:14px;color:var(--text-secondary);">找到 ${data.total} 个结果</p><div class="table-wrapper"><table><thead><tr><th>缩略图</th><th>标题</th><th>频道</th><th>播放量</th><th>点赞</th><th>发布时间</th><th>操作</th></tr></thead><tbody>${data.videos.map(v => `<tr><td><img src="${v.thumbnail || ''}" class="video-thumb" onerror="this.style.display='none'"></td><td style="max-width:300px;"><a href="https://www.youtube.com/watch?v=${v.video_id}" target="_blank" style="color:var(--text);text-decoration:none;font-weight:500;">${v.title || ''}</a></td><td>${v.channel_title || '-'}</td><td class="num" style="font-weight:600;">${formatNumber(v.view_count)}</td><td class="num">${formatNumber(v.like_count)}</td><td style="font-size:13px;">${formatDateShort(v.published_at)}</td><td>${isAdmin ? `<button class="btn btn-secondary btn-sm" onclick="addVideoFromSearch('${v.video_id}', '${(v.title || '').replace(/'/g, '')}')">添加追踪</button>` : ''}</td></tr>`).join('')}</tbody></table></div></div>`;
+        } else {
+            if (!data.channels || data.channels.length === 0) {
+                resultsDiv.innerHTML = '<div class="card" style="text-align:center;padding:40px;color:var(--text-secondary);"><p>未找到相关频道</p></div>';
+                return;
+            }
+            resultsDiv.innerHTML = `<div class="card"><p style="margin-bottom:16px;font-size:14px;color:var(--text-secondary);">找到 ${data.total} 个结果</p>${data.channels.map(c => `<div style="display:flex;gap:16px;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);"><img src="${c.thumbnail || ''}" class="channel-avatar" onerror="this.style.display='none'"><div style="flex:1;"><p style="font-weight:600;">${c.title || ''}</p><p style="font-size:13px;color:var(--text-secondary);">👥 ${formatNumber(c.subscriber_count)} · 🎬 ${formatNumber(c.video_count)} · 👁 ${formatNumber(c.view_count)}</p><p style="font-size:12px;margin-top:4px;">${(c.primary_tags || []).map(t => `<span class="badge badge-primary-tag">${t}</span>`).join(' ')} ${c.region_tag ? `<span class="badge ${regionBadgeClass(c.region_tag)}">${c.region_tag}</span>` : ''} ${c.language ? `<span class="badge badge-lang">${c.language}</span>` : ''}</p></div>${isAdmin ? `<button class="btn btn-primary btn-sm" onclick="addCreatorFromSearch('${c.channel_id}', '${(c.title || '').replace(/'/g, '')}')">添加在管</button>` : ''}</div>`).join('')}</div>`;
+        }
+    } catch (e) {
+        resultsDiv.innerHTML = '<div class="card" style="text-align:center;padding:40px;color:var(--danger);"><p>搜索失败，请检查API配置</p></div>';
+    }
+}
+
+async function addVideoFromSearch(videoId, title) {
+    try {
+        await api('/api/videos/add', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ video_url: videoId, notes: '从搜索添加' }) });
+        showToast(`已添加: ${title.substring(0, 30)}...`, 'success');
+    } catch (e) { console.error(e); }
+}
+
+async function addCreatorFromSearch(channelId, title) {
+    try {
+        await api('/api/creators/add', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ channel_id: channelId, notes: '从搜索添加' }) });
+        showToast(`已添加在管: ${title}`, 'success');
+    } catch (e) { console.error(e); }
+}
+
+// ===== Settings =====
+async function loadSettings() {
+    try {
+        const data = await api('/api/refresh/status');
+        const historyDiv = document.getElementById('refresh-history');
+        if (data.history.length === 0) {
+            historyDiv.innerHTML = '<p style="color:var(--text-secondary);text-align:center;padding:20px;">暂无刷新记录</p>';
+        } else {
+            historyDiv.innerHTML = data.history.reverse().map(log => `
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                    <div><span class="badge ${log.status === 'success' ? 'badge-green' : 'badge-red'}">${log.status}</span><span style="font-size:13px;margin-left:8px;">${log.message}</span></div>
+                    <span style="font-size:12px;color:var(--text-secondary);">${formatDate(log.timestamp)}</span>
+                </div>
+            `).join('');
+        }
+        if (isAdmin) {
+            const adminResp = await api('/api/admin/list');
+            const adminListDiv = document.getElementById('admin-list-display');
+            adminListDiv.innerHTML = `<p style="font-size:13px;margin-bottom:8px;"><strong>当前管理员：</strong></p>${adminResp.admins.map(a => `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;"><span style="font-size:14px;">🔐 ${a}</span>${adminResp.admins.length > 1 && a === adminEmail ? `<button class="btn btn-danger btn-sm" onclick="removeAdmin('${a}')">移除</button>` : ''}</div>`).join('')}`;
+            document.getElementById('admin-add-section').style.display = 'block';
+        } else {
+            document.getElementById('admin-list-display').innerHTML = '<p style="font-size:13px;color:var(--text-secondary);">仅管理员可查看和添加管理员</p>';
+            document.getElementById('admin-add-section').style.display = 'none';
+        }
+        const keywords = ["Genshin Impact","原神","Genshin Impact guide","Genshin Impact gameplay","Genshin Impact new character","Genshin Impact tier list","Genshin Impact trailer","Genshin Impact OST"];
+        document.getElementById('keywords-list').innerHTML = keywords.map(k => `<span class="badge badge-green">${k}</span>`).join('');
+    } catch (e) { console.error(e); }
+}
+
+async function addNewAdmin() {
+    const email = document.getElementById('new-admin-email').value.trim();
+    if (!email) { showToast('请输入邮箱', 'error'); return; }
+    try {
+        const data = await api('/api/admin/add', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email }) });
+        showToast(`已添加管理员: ${email}`, 'success');
+        document.getElementById('new-admin-email').value = '';
+        loadSettings();
+    } catch (e) { console.error(e); }
+}
+
+async function removeAdmin(email) {
+    if (!confirm(`确认移除管理员 ${email}？`)) return;
+    try {
+        await api('/api/admin/remove', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email }) });
+        showToast('管理员已移除', 'success');
+        loadSettings();
+    } catch (e) { console.error(e); }
+}
+
+async function triggerRefresh() {
+    if (!isAdmin) { showToast('需要管理员权限', 'error'); return; }
+    const btn = document.getElementById('btn-refresh');
+    btn.disabled = true; btn.textContent = '刷新中...';
+    showToast('正在刷新数据，可能需要1-2分钟...', 'info');
+    try {
+        const data = await api('/api/refresh', { method: 'POST' });
+        showToast(`刷新完成！视频: ${data.result.videos}, 储备: ${data.result.reserve_creators}, 在管: ${data.result.managed_creators}`, 'success');
+        loadSettings();
+        if (currentPage === 'dashboard') loadDashboard();
+    } catch (e) { showToast('刷新失败', 'error'); }
+    finally { btn.disabled = false; btn.textContent = '刷新全部数据'; }
+}
+
+async function triggerDiscover() {
+    if (!isAdmin) { showToast('需要管理员权限', 'error'); return; }
+    showToast('正在发现新创作者...', 'info');
+    try {
+        const data = await api('/api/refresh/discover', { method: 'POST' });
+        showToast(`发现 ${data.new_creators} 个新创作者`, 'success');
+    } catch (e) { showToast('发现失败', 'error'); }
+}
+
+async function triggerDedup() {
+    if (!isAdmin) { showToast('需要管理员权限', 'error'); return; }
+    try {
+        const data = await api('/api/creators/dedup', { method: 'POST' });
+        showToast(`查重完成，清理了 ${data.removed} 个重复创作者`, 'success');
+    } catch (e) { showToast('查重失败', 'error'); }
+}
+
+// ===== Modals =====
+function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.classList.remove('active'); });
+});
+
+// ===== Start =====
+tryAutoLogin();
+</script>
+</body>
+</html>
