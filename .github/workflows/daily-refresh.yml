@@ -29,6 +29,6 @@ jobs:
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPO: ${{ secrets.GITHUB_REPO }}
-          GITHUB_DATA_BRANCH: ${{ secrets.GITHUB_DATA_BRANCH }}
+          GITHUB_REPO: ${{ secrets.GH_REPO }}
+          GITHUB_DATA_BRANCH: ${{ secrets.GH_BRANCH }}
         run: python backend/daily_refresh.py
