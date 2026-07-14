@@ -15,7 +15,7 @@ SIDEBAR_COLOR = "#fcfffb"         # 侧边栏近白色
 SIDEBAR_GRAD = "linear-gradient(180deg, #fcfffb 0%, #f8fcf9 100%)"  # 侧边栏极浅渐变
 
 # 区域标签
-REGION_TAGS = ["欧区", "美区", "亚区", "其他"]
+REGION_TAGS = ["欧区", "美区"]
 
 # 语言选项
 LANGUAGE_OPTIONS = ["英语", "日语", "中文", "韩语", "法语", "德语", "西班牙语", "葡萄牙语", "俄语", "其他"]
