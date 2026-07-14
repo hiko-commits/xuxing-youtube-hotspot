@@ -1,0 +1,13 @@
+[
+  {
+    "timestamp": "2026-07-14T05:41:54.709585",
+    "status": "success",
+    "message": "Full refresh completed",
+    "stats": {
+      "videos_fetched": 56,
+      "reserve_creators": 8,
+      "managed_creators": 35,
+      "dedup_removed": 0
+    }
+  }
+]
