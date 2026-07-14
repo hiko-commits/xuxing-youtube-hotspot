@@ -1,4 +1,4 @@
-"""
+r"""
 Daily auto-refresh script for 旭星-YouTube热点库
 This script runs at 10:20 AM daily.
 
