@@ -393,5 +393,87 @@
     "prev_video_count": 1355,
     "daily_sub_change": 0,
     "daily_view_change": 83417
+  },
+  {
+    "channel_id": "UCj7yatqU85IRoUmbjSQ2_fw",
+    "title": "Taromii",
+    "description": "Ad Astra Abyssosque Travelers! Let's enjoy our journey in Teyvat together! ✨ Just a passionate traveler sharing Genshin Impact character comparisons, breakdowns, lore, reactions, and the trends taking over Teyvat!",
+    "custom_url": "@taromii11",
+    "country": "US",
+    "published_at": "2026-04-24T01:36:01.049438Z",
+    "thumbnail": "https://yt3.ggpht.com/Yh8imxDNfpHMAIZ62wLRUwGuWEIqWEYj4fM4p36odAQBEzkIY2Jlqal3wTAHiNYlH25X9jci3Q=s800-c-k-c0x00ffffff-no-rj",
+    "banner": "https://yt3.googleusercontent.com/437tcZsc6f3HMHEak7uFLDEgg15n0G6gmpWwaP69gWwwlq5wOqYkf6RhHLt3LGz-o1ZEQPdLf5U",
+    "subscriber_count": 1090,
+    "video_count": 33,
+    "view_count": 6784739,
+    "hidden_subscriber_count": false,
+    "keywords": "\"Genshin Impact\" \"Genshin Shorts\" \"Genshin Impact Shorts\" \"Genshin comparisons\" \"Genshin character breakdown\" \"Genshin character analysis\" \"Genshin animations\" \"Genshin voicelines\" \"Genshin trends\" Teyvat Mondstadt Liyue Inazuma Sumeru Fontaine Natlan \"Nod Krai\" Snezhnaya Khaenriah Celestia \"Fatui Harbingers\" fatui \"elemental burst\" \"elemental skill\" mihoyo hoyoverse",
+    "fetched_at": "2026-07-17T09:28:19.419151",
+    "is_tracked": true,
+    "is_manual": false,
+    "notes": "",
+    "primary_tags": [
+      "反应",
+      "杂谈"
+    ],
+    "secondary_tags": [
+      "内容反应",
+      "角色攻略",
+      "深渊攻略",
+      "设定解析"
+    ],
+    "language": "英语",
+    "region_tag": "美区",
+    "is_managed": false,
+    "added_at": "2026-07-17T09:28:19.419263",
+    "discovered_videos": 1,
+    "discovered_total_views": 1173017,
+    "custom_notes": "",
+    "tags": [
+      "auto_discovered",
+      "反应",
+      "杂谈",
+      "内容反应",
+      "角色攻略",
+      "深渊攻略",
+      "设定解析"
+    ]
+  },
+  {
+    "channel_id": "UCiymgZjpECF5FHJaFGO65Yw",
+    "title": "Shotgun to Neverness",
+    "description": "",
+    "custom_url": "@shotguntoneverness",
+    "country": "US",
+    "published_at": "2026-04-26T12:00:49.192737Z",
+    "thumbnail": "https://yt3.ggpht.com/FP8RsKDt9UOtz25rU913vV3msDECvH2ROSrkqul56ae5IEHtg-_HvSnCbJWuvwxDHiANkBQcew=s800-c-k-c0x00ffffff-no-rj",
+    "banner": "",
+    "subscriber_count": 4770,
+    "video_count": 113,
+    "view_count": 1284664,
+    "hidden_subscriber_count": false,
+    "keywords": "",
+    "fetched_at": "2026-07-17T09:28:19.419967",
+    "is_tracked": true,
+    "is_manual": false,
+    "notes": "",
+    "primary_tags": [
+      "杂谈"
+    ],
+    "secondary_tags": [
+      "杂谈/吐槽"
+    ],
+    "language": "英语",
+    "region_tag": "美区",
+    "is_managed": false,
+    "added_at": "2026-07-17T09:28:19.419995",
+    "discovered_videos": 1,
+    "discovered_total_views": 81666,
+    "custom_notes": "",
+    "tags": [
+      "auto_discovered",
+      "杂谈",
+      "杂谈/吐槽"
+    ]
   }
 ]
