@@ -485,5 +485,42 @@
     "prev_video_count": 113,
     "daily_sub_change": 10,
     "daily_view_change": 20349
+  },
+  {
+    "channel_id": "UCLErCzTZDMd1eONVsko53mg",
+    "title": "Zajef77",
+    "description": "Nerd\nKinda funny sometimes\n24\nGenshin",
+    "custom_url": "@zajef77",
+    "country": "CA",
+    "published_at": "2020-12-10T12:28:39.343445Z",
+    "thumbnail": "https://yt3.ggpht.com/ytc/AIdro_klO4G0KUfBCVARi8yF0YeN_MFIwySfWsCCUJwCt6hH_Q=s800-c-k-c0x00ffffff-no-rj",
+    "banner": "https://yt3.googleusercontent.com/G4HGu4Bn9ozT1hkPA5w2Yb_v23qkEiwlw09xUnkWm4_5Q40oPcpj5MLiBxA5NJ77ciKtSz7MvA",
+    "subscriber_count": 133000,
+    "video_count": 475,
+    "view_count": 44653431,
+    "hidden_subscriber_count": false,
+    "keywords": "",
+    "fetched_at": "2026-07-18T08:28:05.951874",
+    "is_tracked": true,
+    "is_manual": false,
+    "notes": "",
+    "primary_tags": [
+      "杂谈"
+    ],
+    "secondary_tags": [
+      "EXE/ネタ"
+    ],
+    "language": "英语",
+    "region_tag": "美区",
+    "is_managed": false,
+    "added_at": "2026-07-18T08:28:05.951905",
+    "discovered_videos": 1,
+    "discovered_total_views": 106470,
+    "custom_notes": "",
+    "tags": [
+      "auto_discovered",
+      "杂谈",
+      "EXE/ネタ"
+    ]
   }
 ]
