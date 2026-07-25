@@ -659,5 +659,116 @@
     "prev_video_count": 693,
     "daily_sub_change": 1000,
     "daily_view_change": 349871
+  },
+  {
+    "channel_id": "UCyLJ4NiS5LZoquVVYoBkUkA",
+    "title": "senaa",
+    "description": "",
+    "custom_url": "@senaaonyt",
+    "country": "US",
+    "published_at": "2020-09-03T08:32:27.407933Z",
+    "thumbnail": "https://yt3.ggpht.com/2mL08hfVi4cf_mb2gNZehaiY6lmosOVEoE3Mz6QX731Pm_Gfc4LFkM2Ri_r7erJYJIjnitE9vA=s800-c-k-c0x00ffffff-no-rj",
+    "banner": "",
+    "subscriber_count": 4400,
+    "video_count": 37,
+    "view_count": 1307048,
+    "hidden_subscriber_count": false,
+    "keywords": "",
+    "fetched_at": "2026-07-25T09:15:05.562089",
+    "is_tracked": true,
+    "is_manual": false,
+    "notes": "",
+    "primary_tags": [
+      "杂谈"
+    ],
+    "secondary_tags": [
+      "杂谈/吐槽"
+    ],
+    "language": "英语",
+    "region_tag": "美区",
+    "is_managed": false,
+    "added_at": "2026-07-25T09:15:05.562116",
+    "discovered_videos": 1,
+    "discovered_total_views": 852843,
+    "custom_notes": "",
+    "tags": [
+      "auto_discovered",
+      "杂谈",
+      "杂谈/吐槽"
+    ]
+  },
+  {
+    "channel_id": "UCydRfWklS33bDsLexVRrKRQ",
+    "title": "teyvat_of_ol",
+    "description": "Young female Genshin player who likes to share life with others",
+    "custom_url": "@teyvat_of_ol",
+    "country": "GB",
+    "published_at": "2023-11-23T09:43:21.845159Z",
+    "thumbnail": "https://yt3.ggpht.com/dx7NS-0Hc1N3NB4xMbJ_l-x68aLs6briPLYY1G8nBg52fhCaQ3Zowk--aEPA-4jp2bHfmEKHrA=s800-c-k-c0x00ffffff-no-rj",
+    "banner": "",
+    "subscriber_count": 26200,
+    "video_count": 1053,
+    "view_count": 117864472,
+    "hidden_subscriber_count": false,
+    "keywords": "",
+    "fetched_at": "2026-07-25T09:15:05.562378",
+    "is_tracked": true,
+    "is_manual": false,
+    "notes": "",
+    "primary_tags": [
+      "玩法"
+    ],
+    "secondary_tags": [
+      "杂谈/吐槽"
+    ],
+    "language": "英语",
+    "region_tag": "欧区",
+    "is_managed": false,
+    "added_at": "2026-07-25T09:15:05.562411",
+    "discovered_videos": 1,
+    "discovered_total_views": 377100,
+    "custom_notes": "",
+    "tags": [
+      "auto_discovered",
+      "玩法",
+      "杂谈/吐槽"
+    ]
+  },
+  {
+    "channel_id": "UCgVcW0z5R7O0epdEuzuj8Tw",
+    "title": "DukTV",
+    "description": "welcome to my channel! my name is dallas and i create gaming videos.\n\nenjoy!\n",
+    "custom_url": "@duk_tv",
+    "country": "US",
+    "published_at": "2016-06-06T19:53:01Z",
+    "thumbnail": "https://yt3.ggpht.com/4OwDyMhanrlZwGAaKQUGK-NIpKaGQx1FQK9ioeLA_7X1P7XvjB1bzfxUpJ2gy0DrI3dygV5P=s800-c-k-c0x00ffffff-no-rj",
+    "banner": "https://yt3.googleusercontent.com/x5Xchs6BkqDwoYZY2mw4ZMckQTASQ5CHuBtfGOjS9tUiQBD-l3_JTpzFCJr27WHwN9yMMPIdqg",
+    "subscriber_count": 389000,
+    "video_count": 1179,
+    "view_count": 249548861,
+    "hidden_subscriber_count": false,
+    "keywords": "",
+    "fetched_at": "2026-07-25T09:15:05.562416",
+    "is_tracked": true,
+    "is_manual": false,
+    "notes": "",
+    "primary_tags": [
+      "杂谈"
+    ],
+    "secondary_tags": [
+      "杂谈/吐槽"
+    ],
+    "language": "英语",
+    "region_tag": "美区",
+    "is_managed": false,
+    "added_at": "2026-07-25T09:15:05.562449",
+    "discovered_videos": 1,
+    "discovered_total_views": 374612,
+    "custom_notes": "",
+    "tags": [
+      "auto_discovered",
+      "杂谈",
+      "杂谈/吐槽"
+    ]
   }
 ]
