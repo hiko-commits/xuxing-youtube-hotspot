@@ -785,5 +785,81 @@
     "prev_video_count": 1179,
     "daily_sub_change": 0,
     "daily_view_change": 98079
+  },
+  {
+    "channel_id": "UCQHX6ViZmPsWiYSFAyS0a3Q",
+    "title": "GothamChess",
+    "description": "The Internet's Chess Teacher",
+    "custom_url": "@gothamchess",
+    "country": "US",
+    "published_at": "2018-08-07T02:53:51Z",
+    "thumbnail": "https://yt3.ggpht.com/ytc/AIdro_lJ4RQwl-WnWQ_3AgLxvPrLkVdfLHPCRKMxUtLJnjUkhkg=s800-c-k-c0x00ffffff-no-rj",
+    "banner": "https://yt3.googleusercontent.com/cV163mtvXmQh5cWDGdv1RB9tdhH8bYPqeLbD2xOXpTNIK_w6gbPIY9wqRmDHyAw7Hy_-d3v4XA",
+    "subscriber_count": 7880000,
+    "video_count": 3316,
+    "view_count": 5682967606,
+    "hidden_subscriber_count": false,
+    "keywords": "Gothamchess \"Levy Rozman\" \"Levi Rozman\" \"Chess Instruction\" \"Instructional Chess\" \"Chess Lessons\" \"Chess Tips\" \"Gotham Chess\" \"How to play chess\" \"chess lessons for beginners\" \"chess lessons for intermediate\" \"guess the elo\" \"magnus carlsen\" gmhikaru \"hikaru nakamura\"",
+    "fetched_at": "2026-07-26T09:37:50.528273",
+    "is_tracked": true,
+    "is_manual": false,
+    "notes": "",
+    "primary_tags": [
+      "攻略",
+      "玩法"
+    ],
+    "secondary_tags": [
+      "杂谈/吐槽"
+    ],
+    "language": "英语",
+    "region_tag": "美区",
+    "is_managed": false,
+    "added_at": "2026-07-26T09:37:50.528351",
+    "discovered_videos": 1,
+    "discovered_total_views": 1210563,
+    "custom_notes": "",
+    "tags": [
+      "auto_discovered",
+      "攻略",
+      "玩法",
+      "杂谈/吐槽"
+    ]
+  },
+  {
+    "channel_id": "UC_RoH5oR_vsPbjgafZ5ZagQ",
+    "title": "girls_insereniteapot",
+    "description": "Thanks for subscribing\nHave a nice day!\n",
+    "custom_url": "@girls_insereniteapot",
+    "country": "US",
+    "published_at": "2024-07-19T03:19:57.5522Z",
+    "thumbnail": "https://yt3.ggpht.com/tcrx8MtGjBTpqh-ZZpcJXEFryAdnNeoFjX78p5tMGNDuWrp6ycGdoiCbyoqFKpR6_y38Xwm-=s800-c-k-c0x00ffffff-no-rj",
+    "banner": "",
+    "subscriber_count": 109000,
+    "video_count": 356,
+    "view_count": 114133236,
+    "hidden_subscriber_count": false,
+    "keywords": "",
+    "fetched_at": "2026-07-26T09:37:50.528641",
+    "is_tracked": true,
+    "is_manual": false,
+    "notes": "",
+    "primary_tags": [
+      "杂谈"
+    ],
+    "secondary_tags": [
+      "尘歌壶搭建"
+    ],
+    "language": "英语",
+    "region_tag": "美区",
+    "is_managed": false,
+    "added_at": "2026-07-26T09:37:50.528684",
+    "discovered_videos": 1,
+    "discovered_total_views": 915030,
+    "custom_notes": "",
+    "tags": [
+      "auto_discovered",
+      "杂谈",
+      "尘歌壶搭建"
+    ]
   }
 ]
