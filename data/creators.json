@@ -913,5 +913,42 @@
     "prev_video_count": 560,
     "daily_sub_change": 0,
     "daily_view_change": 401898
+  },
+  {
+    "channel_id": "UCfYWID9w7IE2VUj1-6pB1AQ",
+    "title": "Yuzokia ",
+    "description": "Eternally cursed to pull a Qiqi\n",
+    "custom_url": "@yuzokia",
+    "country": "US",
+    "published_at": "2020-04-07T17:38:36.671592Z",
+    "thumbnail": "https://yt3.ggpht.com/IPEUXxvU4ceWs0MLi3n9WP6E3NFmUaw53O9IWA7ipObladks8ws03e_o_6NBGj6g_Zvcqo4j=s800-c-k-c0x00ffffff-no-rj",
+    "banner": "https://yt3.googleusercontent.com/SiT3ewI1XR-PdXyes01PcWrcGLvS8vGKi-FAUIZC4LlPNNSkPq2ciJu1moCU17kJaKSIxwWvCg",
+    "subscriber_count": 13700,
+    "video_count": 232,
+    "view_count": 18633556,
+    "hidden_subscriber_count": false,
+    "keywords": "",
+    "fetched_at": "2026-08-04T11:11:20.824541",
+    "is_tracked": true,
+    "is_manual": false,
+    "notes": "",
+    "primary_tags": [
+      "杂谈"
+    ],
+    "secondary_tags": [
+      "杂谈/吐槽"
+    ],
+    "language": "英语",
+    "region_tag": "美区",
+    "is_managed": false,
+    "added_at": "2026-08-04T11:11:20.824573",
+    "discovered_videos": 1,
+    "discovered_total_views": 757739,
+    "custom_notes": "",
+    "tags": [
+      "auto_discovered",
+      "杂谈",
+      "杂谈/吐槽"
+    ]
   }
 ]
