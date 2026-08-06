@@ -999,5 +999,42 @@
     "prev_video_count": 2060,
     "daily_sub_change": 0,
     "daily_view_change": 187166
+  },
+  {
+    "channel_id": "UCkdx_Uv7xb-SaYpTFENSg-A",
+    "title": "SQam",
+    "description": "This game is my guilty pleasure\n\n",
+    "custom_url": "@sqamimpact",
+    "country": "US",
+    "published_at": "2025-04-03T05:44:50.232073Z",
+    "thumbnail": "https://yt3.ggpht.com/-xPiMRYlbb3I-LajtorBQaAJ4NW-BfjzVyyBodTJ0miYcvMLwnc8xRaSF4nM-FtEXpyRDO0E=s800-c-k-c0x00ffffff-no-rj",
+    "banner": "https://yt3.googleusercontent.com/kPUVPXUCaZidRMB1XEOA0i-pJKabchWUTMKGUDxNaBZr5o25jMQKOWY3qVlLELhbdw4lTeilvg",
+    "subscriber_count": 27100,
+    "video_count": 29,
+    "view_count": 6530680,
+    "hidden_subscriber_count": false,
+    "keywords": "\"Genshin Impact\" SQam Pulls \"Spiral Abyss\" Genshin Hoyoverse Primogems",
+    "fetched_at": "2026-08-06T11:07:54.587176",
+    "is_tracked": true,
+    "is_manual": false,
+    "notes": "",
+    "primary_tags": [
+      "玩法"
+    ],
+    "secondary_tags": [
+      "深渊攻略"
+    ],
+    "language": "英语",
+    "region_tag": "美区",
+    "is_managed": false,
+    "added_at": "2026-08-06T11:07:54.587227",
+    "discovered_videos": 1,
+    "discovered_total_views": 689687,
+    "custom_notes": "",
+    "tags": [
+      "auto_discovered",
+      "玩法",
+      "深渊攻略"
+    ]
   }
 ]
