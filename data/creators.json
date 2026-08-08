@@ -1083,5 +1083,42 @@
     "prev_video_count": 360,
     "daily_sub_change": 0,
     "daily_view_change": 44767
+  },
+  {
+    "channel_id": "UCQfMtfCtsO2ey9YZnFMYffA",
+    "title": "Kamus",
+    "description": "Oi, eu sou o Kamus e... é, eu gosto um pouquinho de Genshin. Só um pouco\n\n\n",
+    "custom_url": "@kamuuska",
+    "country": "BR",
+    "published_at": "2022-07-01T15:11:55.969438Z",
+    "thumbnail": "https://yt3.ggpht.com/CZzH5O5g6Zf6ReDNPuPC5kcFQLnFevlv8T1sUkeDCG1FHm8BR0LQVu6iz5Y-YegKyUHC0BlpLg=s800-c-k-c0x00ffffff-no-rj",
+    "banner": "https://yt3.googleusercontent.com/DtdoU6wyi4w4mTuyoW3CKxsymtzbnXn8EcWNpwrVGUbtLnZKT8XMGbAWx1l1WKmfPaG3svUK",
+    "subscriber_count": 175000,
+    "video_count": 541,
+    "view_count": 62032749,
+    "hidden_subscriber_count": false,
+    "keywords": "kamuska kamus kamuuska genshin impact \"genshin impact\"",
+    "fetched_at": "2026-08-08T05:10:59.209031",
+    "is_tracked": true,
+    "is_manual": false,
+    "notes": "",
+    "primary_tags": [
+      "杂谈"
+    ],
+    "secondary_tags": [
+      "美术、音乐赏析"
+    ],
+    "language": "葡萄牙语",
+    "region_tag": "美区",
+    "is_managed": false,
+    "added_at": "2026-08-08T05:10:59.209076",
+    "discovered_videos": 1,
+    "discovered_total_views": 58293,
+    "custom_notes": "",
+    "tags": [
+      "auto_discovered",
+      "杂谈",
+      "美术、音乐赏析"
+    ]
   }
 ]
