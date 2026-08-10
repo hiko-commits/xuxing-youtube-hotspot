@@ -1265,5 +1265,42 @@
     "prev_video_count": 491,
     "daily_sub_change": 0,
     "daily_view_change": 1065
+  },
+  {
+    "channel_id": "UCqdeBveU7H4K3EyaYvd7mnA",
+    "title": "Tuonto",
+    "description": "yo!\n",
+    "custom_url": "@tuonto",
+    "country": "US",
+    "published_at": "2014-08-22T03:51:01Z",
+    "thumbnail": "https://yt3.ggpht.com/nqJCMA64ooKmLORuWFg2jPSoeNuOyZWmshxLD99Odp26NOho8RMh5oIMD-kEsoaRNQyr_t3ER_Q=s800-c-k-c0x00ffffff-no-rj",
+    "banner": "https://yt3.googleusercontent.com/02DLD9QRAjogJJ4BNQJuNozlE7cMKWygZXv_2hQB0LY11O8sjkL5M0Zu_G37_IyX4r0XgQov",
+    "subscriber_count": 1500000,
+    "video_count": 622,
+    "view_count": 410105399,
+    "hidden_subscriber_count": false,
+    "keywords": "Tuonto \"Jacob Tuonto\" \"Jake Tuonto\" cakeTuonto \"tuonto twitch\" \"cake twitch\" \"caketuonto twitch\" \"tuonto tiktok\" \"tiktok tuonto\" \"tiktok caketuonto\" \"tiktok tuonto\" \"caketuonto youtube\" caketuonto \"youtube caketuonto\" \"jacob tuonto\"",
+    "fetched_at": "2026-08-10T06:20:24.557463",
+    "is_tracked": true,
+    "is_manual": false,
+    "notes": "",
+    "primary_tags": [
+      "杂谈"
+    ],
+    "secondary_tags": [
+      "杂谈/吐槽"
+    ],
+    "language": "英语",
+    "region_tag": "美区",
+    "is_managed": false,
+    "added_at": "2026-08-10T06:20:24.557517",
+    "discovered_videos": 1,
+    "discovered_total_views": 160721,
+    "custom_notes": "",
+    "tags": [
+      "auto_discovered",
+      "杂谈",
+      "杂谈/吐槽"
+    ]
   }
 ]
