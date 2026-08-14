@@ -37295,5 +37295,1375 @@
       "UCm5CNtj836CGb6HROMSQ7bw",
       "UC4OAKH0j9bGIaoxIamhXdrw"
     ]
+  },
+  {
+    "date": "2026-08-14",
+    "timestamp": "2026-08-14T04:14:09.333512",
+    "total_videos": 70,
+    "total_creators": 67,
+    "total_reserve": 32,
+    "total_managed": 35,
+    "reserve_tag_distribution": {
+      "反应": 3,
+      "玩法": 13,
+      "其他才艺": 3,
+      "杂谈": 15,
+      "二创": 3,
+      "资讯": 4,
+      "剪辑": 2,
+      "攻略": 3
+    },
+    "top_videos": [
+      {
+        "video_id": "r5Aoyp5ILIU",
+        "title": "hoyo played in all our faces #genshinimpact #genshin #hoyoverse #shorts",
+        "channel_title": "Lemon patch",
+        "view_count": 3539951,
+        "like_count": 122314
+      },
+      {
+        "video_id": "A0bBkXN_stU",
+        "title": "the difference is crazy I'm crying #genshinimpact #genshin #hoyoverse #shorts",
+        "channel_title": "Lemon patch",
+        "view_count": 3320522,
+        "like_count": 145143
+      },
+      {
+        "video_id": "NvOqZ4aqbI0",
+        "title": "【原神】Ver.7.0記念TVCM「スネージナヤキャラ大紹介」篇",
+        "channel_title": "原神-Genshin-公式",
+        "view_count": 2940893,
+        "like_count": 9099
+      },
+      {
+        "video_id": "i2qUJmU4wlc",
+        "title": "【原神】こんなのできるならVR誰でも買うわ #shorts #原神 #genshinimpact #funny #genshin #パイモン",
+        "channel_title": "ネコるんる",
+        "view_count": 2610702,
+        "like_count": 44012
+      },
+      {
+        "video_id": "3bToJivMBqw",
+        "title": "The Archons Karaoke. 🎤 #genshinimpact #hoyoverse #archon #zhongli #genshin #anim",
+        "channel_title": "HzArt",
+        "view_count": 2606990,
+        "like_count": 102651
+      },
+      {
+        "video_id": "lJHmYzK10-w",
+        "title": "원신 아를레키노 4개국어 더빙비교",
+        "channel_title": "일분만",
+        "view_count": 2322802,
+        "like_count": 37081
+      },
+      {
+        "video_id": "UmtH41iJQjQ",
+        "title": "the CRAZIEST “SIZE” difference in Genshin Impact",
+        "channel_title": "kettletoro",
+        "view_count": 2145438,
+        "like_count": 106440
+      },
+      {
+        "video_id": "dbZa1PgccW8",
+        "title": "when someone asks your age #genshinimpact #arlecchino #aether #sandrone #animati",
+        "channel_title": "Cantclips",
+        "view_count": 2067189,
+        "like_count": 81754
+      },
+      {
+        "video_id": "_JP1La0lfgo",
+        "title": "When Two Genshin Tsunderes Met",
+        "channel_title": "Takumi",
+        "view_count": 1814402,
+        "like_count": 78927
+      },
+      {
+        "video_id": "hncbaQUnFF4",
+        "title": "Genshin Impact Version 7.0 Special Program #NowSnezhnaya #GenshinSnezhnaya #Spec",
+        "channel_title": "Genshin Impact",
+        "view_count": 1491321,
+        "like_count": 80872
+      }
+    ],
+    "top_creators": [
+      {
+        "channel_id": "UCQHX6ViZmPsWiYSFAyS0a3Q",
+        "title": "GothamChess",
+        "subscriber_count": 7960000,
+        "view_count": 5834494684,
+        "video_count": 3358
+      },
+      {
+        "channel_id": "UCDDoMDR0UKzQA7exTjn8M1A",
+        "title": "antonychenn",
+        "subscriber_count": 1650000,
+        "view_count": 310178615,
+        "video_count": 361
+      },
+      {
+        "channel_id": "UCqdeBveU7H4K3EyaYvd7mnA",
+        "title": "Tuonto",
+        "subscriber_count": 1500000,
+        "view_count": 410448901,
+        "video_count": 624
+      },
+      {
+        "channel_id": "UCQ3TV3Z4UHlNiiPSCsgvTsw",
+        "title": "Doro44",
+        "subscriber_count": 1040000,
+        "view_count": 1045027264,
+        "video_count": 1473
+      },
+      {
+        "channel_id": "UCYhmIuoe_5tqdQlB7AhWq0w",
+        "title": "Thejonathon",
+        "subscriber_count": 728000,
+        "view_count": 611702538,
+        "video_count": 663
+      },
+      {
+        "channel_id": "UCidPqWVv4xjsQZggwtsQ8jg",
+        "title": "Gimnaeng",
+        "subscriber_count": 625000,
+        "view_count": 265572872,
+        "video_count": 805
+      },
+      {
+        "channel_id": "UCTHzKyw2gTscMfOOa3FaZxg",
+        "title": "WaddyDohn",
+        "subscriber_count": 576000,
+        "view_count": 292758449,
+        "video_count": 282
+      },
+      {
+        "channel_id": "UCHMnsOPDgrjWvjHXZp-xvqg",
+        "title": "IWinToLose Gaming",
+        "subscriber_count": 515000,
+        "view_count": 189018172,
+        "video_count": 869
+      },
+      {
+        "channel_id": "UCk67qql-jxKjWvGa4W-soZg",
+        "title": "shahrukh_1412",
+        "subscriber_count": 490000,
+        "view_count": 216021995,
+        "video_count": 2738
+      },
+      {
+        "channel_id": "UCE-IbEHusm_nEv4U9NpMIDw",
+        "title": "m1s3n",
+        "subscriber_count": 445000,
+        "view_count": 168008134,
+        "video_count": 1351
+      }
+    ],
+    "creator_snapshots": [
+      {
+        "channel_id": "UCQ3TV3Z4UHlNiiPSCsgvTsw",
+        "title": "Doro44",
+        "subscriber_count": 1040000,
+        "view_count": 1045027264,
+        "video_count": 1473,
+        "primary_tags": [
+          "反应",
+          "玩法",
+          "其他才艺"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UC_tO9ea4MtDBI45cfyGWE3Q",
+        "title": "ayatos tea",
+        "subscriber_count": 4450,
+        "view_count": 25241546,
+        "video_count": 349,
+        "primary_tags": [
+          "杂谈"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UC6LG59kK-NKkVf55M-pnkOA",
+        "title": "Nore Egrets",
+        "subscriber_count": 24200,
+        "view_count": 216073625,
+        "video_count": 855,
+        "primary_tags": [
+          "玩法",
+          "二创"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCXpWY5VTcJOLQqKjwnB6Q2Q",
+        "title": "MMOJACKX57",
+        "subscriber_count": 154000,
+        "view_count": 153495720,
+        "video_count": 9642,
+        "primary_tags": [
+          "资讯",
+          "玩法"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UC3XHc_tIYxsU40M17haloog",
+        "title": "Belle's Bells",
+        "subscriber_count": 21400,
+        "view_count": 42538564,
+        "video_count": 440,
+        "primary_tags": [
+          "二创"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UChWKHYCmWP-Ob25bxlTQsrA",
+        "title": "dhcwsp",
+        "subscriber_count": 71900,
+        "view_count": 328537661,
+        "video_count": 1762,
+        "primary_tags": [
+          "玩法"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCTHzKyw2gTscMfOOa3FaZxg",
+        "title": "WaddyDohn",
+        "subscriber_count": 576000,
+        "view_count": 292758449,
+        "video_count": 282,
+        "primary_tags": [
+          "剪辑"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCtGNIgUx01gD2NlnMZ3J3zw",
+        "title": "JoSee",
+        "subscriber_count": 30800,
+        "view_count": 78196625,
+        "video_count": 1212,
+        "primary_tags": [
+          "玩法"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCD4c_qVU22eQkpl2aopJ6xw",
+        "title": "Slick",
+        "subscriber_count": 11400,
+        "view_count": 15942317,
+        "video_count": 1408,
+        "primary_tags": [
+          "资讯",
+          "攻略",
+          "杂谈"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCj7yatqU85IRoUmbjSQ2_fw",
+        "title": "Taromii",
+        "subscriber_count": 2220,
+        "view_count": 12866591,
+        "video_count": 58,
+        "primary_tags": [
+          "反应",
+          "杂谈"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCiymgZjpECF5FHJaFGO65Yw",
+        "title": "Shotgun to Neverness",
+        "subscriber_count": 5230,
+        "view_count": 1526172,
+        "video_count": 138,
+        "primary_tags": [
+          "杂谈"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCLErCzTZDMd1eONVsko53mg",
+        "title": "Zajef77",
+        "subscriber_count": 135000,
+        "view_count": 45861186,
+        "video_count": 490,
+        "primary_tags": [
+          "杂谈"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCUe0nrSTANERanez8-qOhow",
+        "title": "Sparkz Anime",
+        "subscriber_count": 26700,
+        "view_count": 59147632,
+        "video_count": 280,
+        "primary_tags": [
+          "剪辑"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCDpdPWP3LzPUlrJeVpNv3qA",
+        "title": "zhonglis mora",
+        "subscriber_count": 19200,
+        "view_count": 77450347,
+        "video_count": 979,
+        "primary_tags": [
+          "玩法",
+          "二创"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UC4mW2bRHWfVUS9zT5FokISg",
+        "title": "Misleading",
+        "subscriber_count": 128000,
+        "view_count": 39524032,
+        "video_count": 709,
+        "primary_tags": [
+          "其他才艺"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCyLJ4NiS5LZoquVVYoBkUkA",
+        "title": "senaa",
+        "subscriber_count": 4440,
+        "view_count": 1722143,
+        "video_count": 44,
+        "primary_tags": [
+          "杂谈"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCydRfWklS33bDsLexVRrKRQ",
+        "title": "teyvat_of_ol",
+        "subscriber_count": 26500,
+        "view_count": 122150735,
+        "video_count": 1070,
+        "primary_tags": [
+          "玩法"
+        ],
+        "language": "英语",
+        "region_tag": "欧区"
+      },
+      {
+        "channel_id": "UCgVcW0z5R7O0epdEuzuj8Tw",
+        "title": "DukTV",
+        "subscriber_count": 397000,
+        "view_count": 253425337,
+        "video_count": 1197,
+        "primary_tags": [
+          "杂谈"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCQHX6ViZmPsWiYSFAyS0a3Q",
+        "title": "GothamChess",
+        "subscriber_count": 7960000,
+        "view_count": 5834494684,
+        "video_count": 3358,
+        "primary_tags": [
+          "攻略",
+          "玩法"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UC_RoH5oR_vsPbjgafZ5ZagQ",
+        "title": "girls_insereniteapot",
+        "subscriber_count": 111000,
+        "view_count": 116816559,
+        "video_count": 364,
+        "primary_tags": [
+          "杂谈"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCLtCKCx02WO9iqn8icXgA7g",
+        "title": "KokoOka",
+        "subscriber_count": 93700,
+        "view_count": 80629047,
+        "video_count": 563,
+        "primary_tags": [
+          "杂谈"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCfYWID9w7IE2VUj1-6pB1AQ",
+        "title": "Yuzokia ",
+        "subscriber_count": 13800,
+        "view_count": 18821990,
+        "video_count": 236,
+        "primary_tags": [
+          "杂谈"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UC7H3hGbdGkiyKjdU4AQ1zkw",
+        "title": "BranOnline",
+        "subscriber_count": 414000,
+        "view_count": 529806718,
+        "video_count": 2075,
+        "primary_tags": [
+          "反应",
+          "玩法"
+        ],
+        "language": "英语",
+        "region_tag": "欧区"
+      },
+      {
+        "channel_id": "UCkdx_Uv7xb-SaYpTFENSg-A",
+        "title": "SQam",
+        "subscriber_count": 27300,
+        "view_count": 6665958,
+        "video_count": 29,
+        "primary_tags": [
+          "玩法"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCDDoMDR0UKzQA7exTjn8M1A",
+        "title": "antonychenn",
+        "subscriber_count": 1650000,
+        "view_count": 310178615,
+        "video_count": 361,
+        "primary_tags": [
+          "杂谈"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCQfMtfCtsO2ey9YZnFMYffA",
+        "title": "Kamus",
+        "subscriber_count": 175000,
+        "view_count": 62399620,
+        "video_count": 545,
+        "primary_tags": [
+          "杂谈"
+        ],
+        "language": "葡萄牙语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCZrFZiuKKtEgv5Nd-vJsw-A",
+        "title": "genshin4all",
+        "subscriber_count": 32600,
+        "view_count": 106962230,
+        "video_count": 1240,
+        "primary_tags": [
+          "杂谈"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UColWnHpgYPbb746xFSc_6wQ",
+        "title": "JavaTheCup",
+        "subscriber_count": 386000,
+        "view_count": 133425644,
+        "video_count": 487,
+        "primary_tags": [
+          "资讯",
+          "攻略",
+          "玩法"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCNT4m0ewpzBL9WWOtaCb6BQ",
+        "title": "Teyvat Times",
+        "subscriber_count": 93600,
+        "view_count": 19528744,
+        "video_count": 491,
+        "primary_tags": [
+          "资讯",
+          "玩法"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCqdeBveU7H4K3EyaYvd7mnA",
+        "title": "Tuonto",
+        "subscriber_count": 1500000,
+        "view_count": 410448901,
+        "video_count": 624,
+        "primary_tags": [
+          "杂谈"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCYhmIuoe_5tqdQlB7AhWq0w",
+        "title": "Thejonathon",
+        "subscriber_count": 728000,
+        "view_count": 611702538,
+        "video_count": 663,
+        "primary_tags": [
+          "玩法",
+          "其他才艺"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UC9gZQEkb7E-XEe9JdIytQZQ",
+        "title": "cinemafurina",
+        "subscriber_count": 55200,
+        "view_count": 134091791,
+        "video_count": 511,
+        "primary_tags": [
+          "杂谈"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCHMnsOPDgrjWvjHXZp-xvqg",
+        "title": "IWinToLose Gaming",
+        "subscriber_count": 515000,
+        "view_count": 189018172,
+        "video_count": 869,
+        "primary_tags": [
+          "反应"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCo_Liwx8EKBCFHWB0xV44zQ",
+        "title": "Maerimu",
+        "subscriber_count": 125000,
+        "view_count": 36511603,
+        "video_count": 132,
+        "primary_tags": [
+          "二创"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCsaSxYuz4i4ivRZcqJDRRwA",
+        "title": "ImInFlame",
+        "subscriber_count": 271000,
+        "view_count": 216711876,
+        "video_count": 625,
+        "primary_tags": [
+          "剪辑"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCaU1yp-CZN_HGdRd6N76Dyw",
+        "title": "Ayanime",
+        "subscriber_count": 241000,
+        "view_count": 36826234,
+        "video_count": 77,
+        "primary_tags": [
+          "二创"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCeJvXFlBbA5N0LmVuw7uhrQ",
+        "title": "Atokun",
+        "subscriber_count": 268000,
+        "view_count": 45570458,
+        "video_count": 126,
+        "primary_tags": [
+          "二创"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UC2elWL1o1VwkTZ4LOhXILgg",
+        "title": "genshashin",
+        "subscriber_count": 121000,
+        "view_count": 30109880,
+        "video_count": 347,
+        "primary_tags": [
+          "剪辑"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCtLamgcQptcizPEAAY37xJg",
+        "title": "CatWithBlueHat",
+        "subscriber_count": 399000,
+        "view_count": 119436598,
+        "video_count": 767,
+        "primary_tags": [
+          "剪辑"
+        ],
+        "language": "英语",
+        "region_tag": "亚区"
+      },
+      {
+        "channel_id": "UCWlG0x316-o8hmkwNXBTWMg",
+        "title": "Eakes",
+        "subscriber_count": 153000,
+        "view_count": 47907986,
+        "video_count": 677,
+        "primary_tags": [
+          "反应"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UC5dV-ewjwYjMeNwoXT36tWg",
+        "title": "NomRico",
+        "subscriber_count": 242000,
+        "view_count": 44468029,
+        "video_count": 123,
+        "primary_tags": [
+          "二创"
+        ],
+        "language": "英语",
+        "region_tag": "其他"
+      },
+      {
+        "channel_id": "UCidPqWVv4xjsQZggwtsQ8jg",
+        "title": "Gimnaeng",
+        "subscriber_count": 625000,
+        "view_count": 265572872,
+        "video_count": 805,
+        "primary_tags": [
+          "二创"
+        ],
+        "language": "韩语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCgJ6g1yfnwxbrJPbOIVb0ZQ",
+        "title": "Liviart",
+        "subscriber_count": 304000,
+        "view_count": 197700081,
+        "video_count": 797,
+        "primary_tags": [
+          "二创"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UC8BTtymnCZ7jTvt09cjPMwQ",
+        "title": "Gacha Gamer",
+        "subscriber_count": 406000,
+        "view_count": 155735457,
+        "video_count": 542,
+        "primary_tags": [
+          "攻略"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UC0QBCB2bwKEToGwwx1RchKQ",
+        "title": "agro",
+        "subscriber_count": 213000,
+        "view_count": 39925113,
+        "video_count": 143,
+        "primary_tags": [
+          "攻略"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCE-IbEHusm_nEv4U9NpMIDw",
+        "title": "m1s3n",
+        "subscriber_count": 445000,
+        "view_count": 168008134,
+        "video_count": 1351,
+        "primary_tags": [
+          "剪辑"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UC4ciXBXF_Z6YJ20nm3vqW3w",
+        "title": "Bronie",
+        "subscriber_count": 55800,
+        "view_count": 11664751,
+        "video_count": 186,
+        "primary_tags": [
+          "剪辑"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UCBurTz0AqV5beExmfqoDw5g",
+        "title": "Zannir",
+        "subscriber_count": 381000,
+        "view_count": 157722327,
+        "video_count": 261,
+        "primary_tags": [
+          "剪辑"
+        ],
+        "language": "英语",
+        "region_tag": "美区"
+      },
+      {
+        "channel_id": "UChKjk-z5K5GgsKZyM8bzNSg",
+        "title": "Komemos",
+        "subscriber_count": 18700,
+        "view_count": 5965791,
+        "video_count": 1015,
+        "primary_tags": [
+          "露脸明星"
+        ],
+        "language": "法语",
+        "region_tag": "欧区"
+      },
+      {
+        "channel_id": "UC0RzrzTpsKJBvv9gxLSnIaQ",
+        "title": "FusS",
+        "subscriber_count": 8680,
+        "view_count": 6033921,
+        "video_count": 576,
+        "primary_tags": [
+          "露脸明星"
+        ],
+        "language": "法语",
+        "region_tag": "欧区"
+      },
+      {
+        "channel_id": "UCkNSjqNRVxjtoOfVS7HVjPg",
+        "title": "Misa Joestar",
+        "subscriber_count": 2660,
+        "view_count": 419244,
+        "video_count": 60,
+        "primary_tags": [
+          "露脸明星"
+        ],
+        "language": "法语",
+        "region_tag": "欧区"
+      },
+      {
+        "channel_id": "UCatn3wa_jlgNDbBFo_K3AsA",
+        "title": "Polia",
+        "subscriber_count": 141000,
+        "view_count": 48797237,
+        "video_count": 1066,
+        "primary_tags": [
+          "露脸明星"
+        ],
+        "language": "法语",
+        "region_tag": "欧区"
+      },
+      {
+        "channel_id": "UCTYXkeyVRf_t1ZRfFRZF9eg",
+        "title": "La Pomme Noire",
+        "subscriber_count": 16900,
+        "view_count": 548000,
+        "video_count": 16,
+        "primary_tags": [
+          "综合资讯"
+        ],
+        "language": "法语",
+        "region_tag": "欧区"
+      },
+      {
+        "channel_id": "UC66NyfzyDjYRTdnfETGnMHA",
+        "title": "Kasuke",
+        "subscriber_count": 39500,
+        "view_count": 1911686,
+        "video_count": 94,
+        "primary_tags": [
+          "露脸明星"
+        ],
+        "language": "法语",
+        "region_tag": "欧区"
+      },
+      {
+        "channel_id": "UClEoJntUFzBNLd64jsCj7OQ",
+        "title": "Elythe",
+        "subscriber_count": 11300,
+        "view_count": 1593247,
+        "video_count": 1000,
+        "primary_tags": [
+          "露脸明星"
+        ],
+        "language": "法语",
+        "region_tag": "欧区"
+      },
+      {
+        "channel_id": "UCIBrgxoSPbF6vTm3qD26H7A",
+        "title": "millesoup",
+        "subscriber_count": 31800,
+        "view_count": 5279309,
+        "video_count": 58,
+        "primary_tags": [
+          "综合资讯"
+        ],
+        "language": "法语",
+        "region_tag": "欧区"
+      },
+      {
+        "channel_id": "UCUYnjIyS7y_lDHFYepzpuhA",
+        "title": "Akenouille",
+        "subscriber_count": 14100,
+        "view_count": 2843885,
+        "video_count": 520,
+        "primary_tags": [
+          "攻略"
+        ],
+        "language": "法语",
+        "region_tag": "欧区"
+      },
+      {
+        "channel_id": "UCBaB1WEGbMC4XmEh_cXxjlA",
+        "title": "Aiynao",
+        "subscriber_count": 42100,
+        "view_count": 9705364,
+        "video_count": 797,
+        "primary_tags": [
+          "杂谈"
+        ],
+        "language": "法语",
+        "region_tag": "欧区"
+      },
+      {
+        "channel_id": "UC2h3bFlN4IVvNDH7KL1oOZA",
+        "title": "Spuufi",
+        "subscriber_count": 8900,
+        "view_count": 465019,
+        "video_count": 171,
+        "primary_tags": [
+          "露脸明星"
+        ],
+        "language": "英语",
+        "region_tag": "欧区"
+      },
+      {
+        "channel_id": "UCvrLxitEKiEE47Rfq2wg05g",
+        "title": "AlexYuki",
+        "subscriber_count": 111000,
+        "view_count": 44242381,
+        "video_count": 2395,
+        "primary_tags": [
+          "露脸明星"
+        ],
+        "language": "法语",
+        "region_tag": "欧区"
+      },
+      {
+        "channel_id": "UCpeoxBKmEdVZWFw0fCq0M9g",
+        "title": "Manon Zoldik",
+        "subscriber_count": 9610,
+        "view_count": 2099319,
+        "video_count": 400,
+        "primary_tags": [
+          "杂谈"
+        ],
+        "language": "法语",
+        "region_tag": "欧区"
+      },
+      {
+        "channel_id": "UCt7jeCIS31bZvH6G7KXmRpw",
+        "title": "ShiruTV_",
+        "subscriber_count": 40800,
+        "view_count": 13741796,
+        "video_count": 1902,
+        "primary_tags": [
+          "攻略"
+        ],
+        "language": "法语",
+        "region_tag": "欧区"
+      },
+      {
+        "channel_id": "UCi9iMwYtRtf36_MIIwuNfOg",
+        "title": "Crimson",
+        "subscriber_count": 71300,
+        "view_count": 59999655,
+        "video_count": 1154,
+        "primary_tags": [
+          "二创"
+        ],
+        "language": "德语",
+        "region_tag": "欧区"
+      },
+      {
+        "channel_id": "UCU0GFcH8CyiuPg-y69YQ4qw",
+        "title": "zenqu",
+        "subscriber_count": 4150,
+        "view_count": 7737754,
+        "video_count": 633,
+        "primary_tags": [
+          "露脸明星"
+        ],
+        "language": "英语",
+        "region_tag": "欧区"
+      },
+      {
+        "channel_id": "UCk67qql-jxKjWvGa4W-soZg",
+        "title": "shahrukh_1412",
+        "subscriber_count": 490000,
+        "view_count": 216021995,
+        "video_count": 2738,
+        "primary_tags": [
+          "反应"
+        ],
+        "language": "德语",
+        "region_tag": "欧区"
+      },
+      {
+        "channel_id": "UCm5CNtj836CGb6HROMSQ7bw",
+        "title": "Sonius - Genshin Impact",
+        "subscriber_count": 17700,
+        "view_count": 5416528,
+        "video_count": 1128,
+        "primary_tags": [
+          "露脸明星"
+        ],
+        "language": "德语",
+        "region_tag": "欧区"
+      },
+      {
+        "channel_id": "UC4OAKH0j9bGIaoxIamhXdrw",
+        "title": "Senpai Panjo",
+        "subscriber_count": 16400,
+        "view_count": 48688071,
+        "video_count": 562,
+        "primary_tags": [
+          "露脸明星"
+        ],
+        "language": "德语",
+        "region_tag": "欧区"
+      }
+    ],
+    "managed_snapshots": [
+      {
+        "channel_id": "UCHMnsOPDgrjWvjHXZp-xvqg",
+        "title": "IWinToLose Gaming",
+        "subscriber_count": 515000,
+        "view_count": 189018172,
+        "video_count": 869,
+        "region_tag": "美区",
+        "language": "英语"
+      },
+      {
+        "channel_id": "UCo_Liwx8EKBCFHWB0xV44zQ",
+        "title": "Maerimu",
+        "subscriber_count": 125000,
+        "view_count": 36511603,
+        "video_count": 132,
+        "region_tag": "美区",
+        "language": "英语"
+      },
+      {
+        "channel_id": "UCsaSxYuz4i4ivRZcqJDRRwA",
+        "title": "ImInFlame",
+        "subscriber_count": 271000,
+        "view_count": 216711876,
+        "video_count": 625,
+        "region_tag": "美区",
+        "language": "英语"
+      },
+      {
+        "channel_id": "UCaU1yp-CZN_HGdRd6N76Dyw",
+        "title": "Ayanime",
+        "subscriber_count": 241000,
+        "view_count": 36826234,
+        "video_count": 77,
+        "region_tag": "美区",
+        "language": "英语"
+      },
+      {
+        "channel_id": "UCeJvXFlBbA5N0LmVuw7uhrQ",
+        "title": "Atokun",
+        "subscriber_count": 268000,
+        "view_count": 45570458,
+        "video_count": 126,
+        "region_tag": "美区",
+        "language": "英语"
+      },
+      {
+        "channel_id": "UC2elWL1o1VwkTZ4LOhXILgg",
+        "title": "genshashin",
+        "subscriber_count": 121000,
+        "view_count": 30109880,
+        "video_count": 347,
+        "region_tag": "美区",
+        "language": "英语"
+      },
+      {
+        "channel_id": "UCtLamgcQptcizPEAAY37xJg",
+        "title": "CatWithBlueHat",
+        "subscriber_count": 399000,
+        "view_count": 119436598,
+        "video_count": 767,
+        "region_tag": "亚区",
+        "language": "英语"
+      },
+      {
+        "channel_id": "UCWlG0x316-o8hmkwNXBTWMg",
+        "title": "Eakes",
+        "subscriber_count": 153000,
+        "view_count": 47907986,
+        "video_count": 677,
+        "region_tag": "美区",
+        "language": "英语"
+      },
+      {
+        "channel_id": "UC5dV-ewjwYjMeNwoXT36tWg",
+        "title": "NomRico",
+        "subscriber_count": 242000,
+        "view_count": 44468029,
+        "video_count": 123,
+        "region_tag": "其他",
+        "language": "英语"
+      },
+      {
+        "channel_id": "UCidPqWVv4xjsQZggwtsQ8jg",
+        "title": "Gimnaeng",
+        "subscriber_count": 625000,
+        "view_count": 265572872,
+        "video_count": 805,
+        "region_tag": "美区",
+        "language": "韩语"
+      },
+      {
+        "channel_id": "UCgJ6g1yfnwxbrJPbOIVb0ZQ",
+        "title": "Liviart",
+        "subscriber_count": 304000,
+        "view_count": 197700081,
+        "video_count": 797,
+        "region_tag": "美区",
+        "language": "英语"
+      },
+      {
+        "channel_id": "UC8BTtymnCZ7jTvt09cjPMwQ",
+        "title": "Gacha Gamer",
+        "subscriber_count": 406000,
+        "view_count": 155735457,
+        "video_count": 542,
+        "region_tag": "美区",
+        "language": "英语"
+      },
+      {
+        "channel_id": "UC0QBCB2bwKEToGwwx1RchKQ",
+        "title": "agro",
+        "subscriber_count": 213000,
+        "view_count": 39925113,
+        "video_count": 143,
+        "region_tag": "美区",
+        "language": "英语"
+      },
+      {
+        "channel_id": "UCE-IbEHusm_nEv4U9NpMIDw",
+        "title": "m1s3n",
+        "subscriber_count": 445000,
+        "view_count": 168008134,
+        "video_count": 1351,
+        "region_tag": "美区",
+        "language": "英语"
+      },
+      {
+        "channel_id": "UC4ciXBXF_Z6YJ20nm3vqW3w",
+        "title": "Bronie",
+        "subscriber_count": 55800,
+        "view_count": 11664751,
+        "video_count": 186,
+        "region_tag": "美区",
+        "language": "英语"
+      },
+      {
+        "channel_id": "UCBurTz0AqV5beExmfqoDw5g",
+        "title": "Zannir",
+        "subscriber_count": 381000,
+        "view_count": 157722327,
+        "video_count": 261,
+        "region_tag": "美区",
+        "language": "英语"
+      },
+      {
+        "channel_id": "UChKjk-z5K5GgsKZyM8bzNSg",
+        "title": "Komemos",
+        "subscriber_count": 18700,
+        "view_count": 5965791,
+        "video_count": 1015,
+        "region_tag": "欧区",
+        "language": "法语"
+      },
+      {
+        "channel_id": "UC0RzrzTpsKJBvv9gxLSnIaQ",
+        "title": "FusS",
+        "subscriber_count": 8680,
+        "view_count": 6033921,
+        "video_count": 576,
+        "region_tag": "欧区",
+        "language": "法语"
+      },
+      {
+        "channel_id": "UCkNSjqNRVxjtoOfVS7HVjPg",
+        "title": "Misa Joestar",
+        "subscriber_count": 2660,
+        "view_count": 419244,
+        "video_count": 60,
+        "region_tag": "欧区",
+        "language": "法语"
+      },
+      {
+        "channel_id": "UCatn3wa_jlgNDbBFo_K3AsA",
+        "title": "Polia",
+        "subscriber_count": 141000,
+        "view_count": 48797237,
+        "video_count": 1066,
+        "region_tag": "欧区",
+        "language": "法语"
+      },
+      {
+        "channel_id": "UCTYXkeyVRf_t1ZRfFRZF9eg",
+        "title": "La Pomme Noire",
+        "subscriber_count": 16900,
+        "view_count": 548000,
+        "video_count": 16,
+        "region_tag": "欧区",
+        "language": "法语"
+      },
+      {
+        "channel_id": "UC66NyfzyDjYRTdnfETGnMHA",
+        "title": "Kasuke",
+        "subscriber_count": 39500,
+        "view_count": 1911686,
+        "video_count": 94,
+        "region_tag": "欧区",
+        "language": "法语"
+      },
+      {
+        "channel_id": "UClEoJntUFzBNLd64jsCj7OQ",
+        "title": "Elythe",
+        "subscriber_count": 11300,
+        "view_count": 1593247,
+        "video_count": 1000,
+        "region_tag": "欧区",
+        "language": "法语"
+      },
+      {
+        "channel_id": "UCIBrgxoSPbF6vTm3qD26H7A",
+        "title": "millesoup",
+        "subscriber_count": 31800,
+        "view_count": 5279309,
+        "video_count": 58,
+        "region_tag": "欧区",
+        "language": "法语"
+      },
+      {
+        "channel_id": "UCUYnjIyS7y_lDHFYepzpuhA",
+        "title": "Akenouille",
+        "subscriber_count": 14100,
+        "view_count": 2843885,
+        "video_count": 520,
+        "region_tag": "欧区",
+        "language": "法语"
+      },
+      {
+        "channel_id": "UCBaB1WEGbMC4XmEh_cXxjlA",
+        "title": "Aiynao",
+        "subscriber_count": 42100,
+        "view_count": 9705364,
+        "video_count": 797,
+        "region_tag": "欧区",
+        "language": "法语"
+      },
+      {
+        "channel_id": "UC2h3bFlN4IVvNDH7KL1oOZA",
+        "title": "Spuufi",
+        "subscriber_count": 8900,
+        "view_count": 465019,
+        "video_count": 171,
+        "region_tag": "欧区",
+        "language": "英语"
+      },
+      {
+        "channel_id": "UCvrLxitEKiEE47Rfq2wg05g",
+        "title": "AlexYuki",
+        "subscriber_count": 111000,
+        "view_count": 44242381,
+        "video_count": 2395,
+        "region_tag": "欧区",
+        "language": "法语"
+      },
+      {
+        "channel_id": "UCpeoxBKmEdVZWFw0fCq0M9g",
+        "title": "Manon Zoldik",
+        "subscriber_count": 9610,
+        "view_count": 2099319,
+        "video_count": 400,
+        "region_tag": "欧区",
+        "language": "法语"
+      },
+      {
+        "channel_id": "UCt7jeCIS31bZvH6G7KXmRpw",
+        "title": "ShiruTV_",
+        "subscriber_count": 40800,
+        "view_count": 13741796,
+        "video_count": 1902,
+        "region_tag": "欧区",
+        "language": "法语"
+      },
+      {
+        "channel_id": "UCi9iMwYtRtf36_MIIwuNfOg",
+        "title": "Crimson",
+        "subscriber_count": 71300,
+        "view_count": 59999655,
+        "video_count": 1154,
+        "region_tag": "欧区",
+        "language": "德语"
+      },
+      {
+        "channel_id": "UCU0GFcH8CyiuPg-y69YQ4qw",
+        "title": "zenqu",
+        "subscriber_count": 4150,
+        "view_count": 7737754,
+        "video_count": 633,
+        "region_tag": "欧区",
+        "language": "英语"
+      },
+      {
+        "channel_id": "UCk67qql-jxKjWvGa4W-soZg",
+        "title": "shahrukh_1412",
+        "subscriber_count": 490000,
+        "view_count": 216021995,
+        "video_count": 2738,
+        "region_tag": "欧区",
+        "language": "德语"
+      },
+      {
+        "channel_id": "UCm5CNtj836CGb6HROMSQ7bw",
+        "title": "Sonius - Genshin Impact",
+        "subscriber_count": 17700,
+        "view_count": 5416528,
+        "video_count": 1128,
+        "region_tag": "欧区",
+        "language": "德语"
+      },
+      {
+        "channel_id": "UC4OAKH0j9bGIaoxIamhXdrw",
+        "title": "Senpai Panjo",
+        "subscriber_count": 16400,
+        "view_count": 48688071,
+        "video_count": 562,
+        "region_tag": "欧区",
+        "language": "德语"
+      }
+    ],
+    "reserve_creator_ids": [
+      "UCQ3TV3Z4UHlNiiPSCsgvTsw",
+      "UC_tO9ea4MtDBI45cfyGWE3Q",
+      "UC6LG59kK-NKkVf55M-pnkOA",
+      "UCXpWY5VTcJOLQqKjwnB6Q2Q",
+      "UC3XHc_tIYxsU40M17haloog",
+      "UChWKHYCmWP-Ob25bxlTQsrA",
+      "UCTHzKyw2gTscMfOOa3FaZxg",
+      "UCtGNIgUx01gD2NlnMZ3J3zw",
+      "UCD4c_qVU22eQkpl2aopJ6xw",
+      "UCj7yatqU85IRoUmbjSQ2_fw",
+      "UCiymgZjpECF5FHJaFGO65Yw",
+      "UCLErCzTZDMd1eONVsko53mg",
+      "UCUe0nrSTANERanez8-qOhow",
+      "UCDpdPWP3LzPUlrJeVpNv3qA",
+      "UC4mW2bRHWfVUS9zT5FokISg",
+      "UCyLJ4NiS5LZoquVVYoBkUkA",
+      "UCydRfWklS33bDsLexVRrKRQ",
+      "UCgVcW0z5R7O0epdEuzuj8Tw",
+      "UCQHX6ViZmPsWiYSFAyS0a3Q",
+      "UC_RoH5oR_vsPbjgafZ5ZagQ",
+      "UCLtCKCx02WO9iqn8icXgA7g",
+      "UCfYWID9w7IE2VUj1-6pB1AQ",
+      "UC7H3hGbdGkiyKjdU4AQ1zkw",
+      "UCkdx_Uv7xb-SaYpTFENSg-A",
+      "UCDDoMDR0UKzQA7exTjn8M1A",
+      "UCQfMtfCtsO2ey9YZnFMYffA",
+      "UCZrFZiuKKtEgv5Nd-vJsw-A",
+      "UColWnHpgYPbb746xFSc_6wQ",
+      "UCNT4m0ewpzBL9WWOtaCb6BQ",
+      "UCqdeBveU7H4K3EyaYvd7mnA",
+      "UCYhmIuoe_5tqdQlB7AhWq0w",
+      "UC9gZQEkb7E-XEe9JdIytQZQ"
+    ],
+    "managed_creator_ids": [
+      "UCHMnsOPDgrjWvjHXZp-xvqg",
+      "UCo_Liwx8EKBCFHWB0xV44zQ",
+      "UCsaSxYuz4i4ivRZcqJDRRwA",
+      "UCaU1yp-CZN_HGdRd6N76Dyw",
+      "UCeJvXFlBbA5N0LmVuw7uhrQ",
+      "UC2elWL1o1VwkTZ4LOhXILgg",
+      "UCtLamgcQptcizPEAAY37xJg",
+      "UCWlG0x316-o8hmkwNXBTWMg",
+      "UC5dV-ewjwYjMeNwoXT36tWg",
+      "UCidPqWVv4xjsQZggwtsQ8jg",
+      "UCgJ6g1yfnwxbrJPbOIVb0ZQ",
+      "UC8BTtymnCZ7jTvt09cjPMwQ",
+      "UC0QBCB2bwKEToGwwx1RchKQ",
+      "UCE-IbEHusm_nEv4U9NpMIDw",
+      "UC4ciXBXF_Z6YJ20nm3vqW3w",
+      "UCBurTz0AqV5beExmfqoDw5g",
+      "UChKjk-z5K5GgsKZyM8bzNSg",
+      "UC0RzrzTpsKJBvv9gxLSnIaQ",
+      "UCkNSjqNRVxjtoOfVS7HVjPg",
+      "UCatn3wa_jlgNDbBFo_K3AsA",
+      "UCTYXkeyVRf_t1ZRfFRZF9eg",
+      "UC66NyfzyDjYRTdnfETGnMHA",
+      "UClEoJntUFzBNLd64jsCj7OQ",
+      "UCIBrgxoSPbF6vTm3qD26H7A",
+      "UCUYnjIyS7y_lDHFYepzpuhA",
+      "UCBaB1WEGbMC4XmEh_cXxjlA",
+      "UC2h3bFlN4IVvNDH7KL1oOZA",
+      "UCvrLxitEKiEE47Rfq2wg05g",
+      "UCpeoxBKmEdVZWFw0fCq0M9g",
+      "UCt7jeCIS31bZvH6G7KXmRpw",
+      "UCi9iMwYtRtf36_MIIwuNfOg",
+      "UCU0GFcH8CyiuPg-y69YQ4qw",
+      "UCk67qql-jxKjWvGa4W-soZg",
+      "UCm5CNtj836CGb6HROMSQ7bw",
+      "UC4OAKH0j9bGIaoxIamhXdrw"
+    ]
   }
 ]
