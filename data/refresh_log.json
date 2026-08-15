@@ -350,5 +350,16 @@
       "managed_creators": 35,
       "dedup_removed": 0
     }
+  },
+  {
+    "timestamp": "2026-08-15T02:57:34.886831",
+    "status": "success",
+    "message": "Full refresh completed",
+    "stats": {
+      "videos_fetched": 75,
+      "reserve_creators": 32,
+      "managed_creators": 35,
+      "dedup_removed": 0
+    }
   }
 ]
