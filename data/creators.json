@@ -1677,5 +1677,46 @@
     "prev_video_count": 80,
     "daily_sub_change": 0,
     "daily_view_change": 303729
+  },
+  {
+    "channel_id": "UCG98ruDeyp55THxbpBCIv3g",
+    "title": "Duolingo",
+    "description": "hot owl summer 💚🦉",
+    "custom_url": "@duolingo",
+    "country": "US",
+    "published_at": "2011-11-27T14:22:12Z",
+    "thumbnail": "https://yt3.ggpht.com/wNU1Qy1Zjs_rGR3sGzra5F61zL-Y-WaQTvsCz87iQURQyX__386qEo-PTTWyHn8HQFJmSMcCd60=s800-c-k-c0x00ffffff-no-rj",
+    "banner": "https://yt3.googleusercontent.com/0ABFczl30bdIMdtXqMoZAq-g46Vgeo09DNdIcZDQItN5HRiiMSjGLsyUdXf-eLkz5NwYOxjL",
+    "subscriber_count": 6770000,
+    "video_count": 1106,
+    "view_count": 2451628018,
+    "hidden_subscriber_count": false,
+    "keywords": "education learning language languages spanish english español french français russian japanese portuguese chinese mandarin swedish italian edu youtube linguistics duolingo \"luis von ahn\" technology mobile gaming games science duocon duolingo duolingi \"duo lingo\" \"duolingo meme\" \"duolingo app\" dualingo duelingo \"foreign language\" \"duolingo song\" \"duo owl\" \"songs with duo\" memes \"funny memes\"",
+    "fetched_at": "2026-08-24T03:10:09.747144",
+    "is_tracked": true,
+    "is_manual": false,
+    "notes": "",
+    "primary_tags": [
+      "玩法",
+      "剪辑",
+      "其他才艺"
+    ],
+    "secondary_tags": [
+      "EXE/ネタ"
+    ],
+    "language": "英语",
+    "region_tag": "美区",
+    "is_managed": false,
+    "added_at": "2026-08-24T03:10:09.747229",
+    "discovered_videos": 1,
+    "discovered_total_views": 763497,
+    "custom_notes": "",
+    "tags": [
+      "auto_discovered",
+      "玩法",
+      "剪辑",
+      "其他才艺",
+      "EXE/ネタ"
+    ]
   }
 ]
