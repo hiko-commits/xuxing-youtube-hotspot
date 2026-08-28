@@ -1681,5 +1681,42 @@
     "prev_video_count": 1109,
     "daily_sub_change": 0,
     "daily_view_change": 1231392
+  },
+  {
+    "channel_id": "UClnyCHs0n72z8BUsU2q7h0Q",
+    "title": "Wolfisor",
+    "description": "I yap about characters :]\n",
+    "custom_url": "@wolfisor",
+    "country": "RO",
+    "published_at": "2022-11-07T21:42:34.64782Z",
+    "thumbnail": "https://yt3.ggpht.com/RHeB_bILMvgw8Gbw3zXQzbcCj5WG7OjGBxWiiiDIOP7IZ-VGJ5aFexEQyJtdKisMVYfyJeeV=s800-c-k-c0x00ffffff-no-rj",
+    "banner": "https://yt3.googleusercontent.com/5bvEUFolTB9KwJbDbLm5FXxWGXOyx-WA8DcL0osXAQEGxCS55z8722fmv8QxBauvBPlUyffl",
+    "subscriber_count": 47100,
+    "video_count": 211,
+    "view_count": 28328045,
+    "hidden_subscriber_count": false,
+    "keywords": "\"Genshin Impact\" English",
+    "fetched_at": "2026-08-28T14:14:37.101932",
+    "is_tracked": true,
+    "is_manual": false,
+    "notes": "",
+    "primary_tags": [
+      "杂谈"
+    ],
+    "secondary_tags": [
+      "角色攻略"
+    ],
+    "language": "英语",
+    "region_tag": "欧区",
+    "is_managed": false,
+    "added_at": "2026-08-28T14:14:37.101968",
+    "discovered_videos": 1,
+    "discovered_total_views": 427997,
+    "custom_notes": "",
+    "tags": [
+      "auto_discovered",
+      "杂谈",
+      "角色攻略"
+    ]
   }
 ]
