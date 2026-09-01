@@ -1723,5 +1723,83 @@
     "prev_video_count": 211,
     "daily_sub_change": 200,
     "daily_view_change": 51007
+  },
+  {
+    "channel_id": "UCvzWGXYFDiiJ338KIJPhbhQ",
+    "title": "Black Gryph0n",
+    "description": "Hi! I’m Gabriel Brown (Black Gryph0n) and I make music with my brother Nate Brown (Baasik)!\n\nBUSINESS INQUIRIES: \nmgmt@BlackGryph0n.com",
+    "custom_url": "@blackgryph0n",
+    "country": "US",
+    "published_at": "2007-09-13T05:25:33Z",
+    "thumbnail": "https://yt3.ggpht.com/rN_3QaO8SQtvnwg06yGcMA73Qr4BL3hFcMyh54WHAvGk9VLBtxdVZH9qe9IFt0vgllo1OW90tA=s800-c-k-c0x00ffffff-no-rj",
+    "banner": "https://yt3.googleusercontent.com/_aF-xOfLz9nPQgh0VkCXXKMddoXWDh2ZMrEl68m-WhowUwONz24wbQHjvUs-koEcCPACj2PFebc",
+    "subscriber_count": 5700000,
+    "video_count": 338,
+    "view_count": 1481776021,
+    "hidden_subscriber_count": false,
+    "keywords": "voice acting impressions BlackGryph0n brony music songs original funny animation Music electro dubstep house skydiving light sabers laser guns explosion comedy awesome cool stupid random gnstudios fpv black gryphon blackgryphon gabriel brown christian",
+    "fetched_at": "2026-09-01T07:38:16.468646",
+    "is_tracked": true,
+    "is_manual": false,
+    "notes": "",
+    "primary_tags": [
+      "其他才艺"
+    ],
+    "secondary_tags": [
+      "美术、音乐赏析",
+      "EXE/ネタ"
+    ],
+    "language": "英语",
+    "region_tag": "美区",
+    "is_managed": false,
+    "added_at": "2026-09-01T07:38:16.468739",
+    "discovered_videos": 1,
+    "discovered_total_views": 1237840,
+    "custom_notes": "",
+    "tags": [
+      "auto_discovered",
+      "其他才艺",
+      "美术、音乐赏析",
+      "EXE/ネタ"
+    ]
+  },
+  {
+    "channel_id": "UCAkou4jx-hNwZUvT-MTYGig",
+    "title": "Brakuren",
+    "description": "I primarily make Genshin Impact Challenge/Bug Videos that I spend a lot of time editing.\n\nI am from the United States\n\n",
+    "custom_url": "@brakuren",
+    "country": "",
+    "published_at": "2015-03-09T20:40:09Z",
+    "thumbnail": "https://yt3.ggpht.com/APCGOzQKqAYHXE7LnELzchhs6QTmYYIuLNVPDj4bC5tUokyUPHW0WtHkCUGQ9VWdKoPurtmP=s800-c-k-c0x00ffffff-no-rj",
+    "banner": "https://yt3.googleusercontent.com/2Lz7vaqg-cIgi8FiOJ_pUeWXPGUZjTnAR7wv5azXS3VDz1Vo2mNC8fWm0qNFSeeFeWxkRI13cQ",
+    "subscriber_count": 8890,
+    "video_count": 32,
+    "view_count": 3350703,
+    "hidden_subscriber_count": false,
+    "keywords": "",
+    "fetched_at": "2026-09-01T07:38:16.469323",
+    "is_tracked": true,
+    "is_manual": false,
+    "notes": "",
+    "primary_tags": [
+      "剪辑"
+    ],
+    "secondary_tags": [
+      "特殊命题挑战",
+      "AMV(现有素材)"
+    ],
+    "language": "英语",
+    "region_tag": "美区",
+    "is_managed": false,
+    "added_at": "2026-09-01T07:38:16.469373",
+    "discovered_videos": 1,
+    "discovered_total_views": 738358,
+    "custom_notes": "",
+    "tags": [
+      "auto_discovered",
+      "剪辑",
+      "特殊命题挑战",
+      "AMV(现有素材)"
+    ]
   }
 ]
