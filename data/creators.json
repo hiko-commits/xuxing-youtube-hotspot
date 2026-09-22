@@ -2043,5 +2043,42 @@
     "prev_video_count": 1429,
     "daily_sub_change": 0,
     "daily_view_change": 207937
+  },
+  {
+    "channel_id": "UCIBPO8UasUvHrVwCzGVvsFQ",
+    "title": "dish",
+    "description": "people first, games second\n",
+    "custom_url": "@dishh",
+    "country": "US",
+    "published_at": "2020-04-18T17:06:19.875324Z",
+    "thumbnail": "https://yt3.ggpht.com/Wwe3-_dnxl-qID_6MvsV4iK3lT064dBrQjBAde27GVc_Hshw_2NwmNL568xnK4RdTpHq12nJ=s800-c-k-c0x00ffffff-no-rj",
+    "banner": "https://yt3.googleusercontent.com/7qTQ08wz2PIoWFOTAjswb1qfEhg7Pw6TET9VPdgpU7eIeucLilYivSSy9uPk0P3qyZO8D5hu",
+    "subscriber_count": 778000,
+    "video_count": 664,
+    "view_count": 215571299,
+    "hidden_subscriber_count": false,
+    "keywords": "\"Companion Dish\" Dish",
+    "fetched_at": "2026-09-22T07:35:32.904714",
+    "is_tracked": true,
+    "is_manual": false,
+    "notes": "",
+    "primary_tags": [
+      "玩法"
+    ],
+    "secondary_tags": [
+      "杂谈/吐槽"
+    ],
+    "language": "英语",
+    "region_tag": "美区",
+    "is_managed": false,
+    "added_at": "2026-09-22T07:35:32.904748",
+    "discovered_videos": 1,
+    "discovered_total_views": 874962,
+    "custom_notes": "",
+    "tags": [
+      "auto_discovered",
+      "玩法",
+      "杂谈/吐槽"
+    ]
   }
 ]
