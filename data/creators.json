@@ -2125,5 +2125,44 @@
     "prev_video_count": 60,
     "daily_sub_change": 0,
     "daily_view_change": 69231
+  },
+  {
+    "channel_id": "UCd7JlEhpXmFwxQFiUZyKFMA",
+    "title": "dawit",
+    "description": "whats up buttercup\n\n",
+    "custom_url": "@dawitslookingforemilia",
+    "country": "US",
+    "published_at": "2016-02-19T19:32:06Z",
+    "thumbnail": "https://yt3.ggpht.com/1bMtUAJLwEmCyuuVKttGTlNqf96Yi1ec5ELlbrMdV7bACxbvyzqOVKh9rc0rWWdBJqMpplUbew=s800-c-k-c0x00ffffff-no-rj",
+    "banner": "https://yt3.googleusercontent.com/8SfhchhTdhF0zZslxgJTCu_cXfwO8CjzN5Q5GqnIMiZTqdWi8ejc_OtnMaLjrqRfdNBV5ODjEkM",
+    "subscriber_count": 47500,
+    "video_count": 445,
+    "view_count": 9819961,
+    "hidden_subscriber_count": false,
+    "keywords": "Entertainment Funny Narc dawit \"genshin impact\" gaming hoyoverse genshinimpact \"genshin impact lore\" furina \"genshin impact theories\" scary horror lol",
+    "fetched_at": "2026-10-05T08:46:43.806489",
+    "is_tracked": true,
+    "is_manual": false,
+    "notes": "",
+    "primary_tags": [
+      "杂谈"
+    ],
+    "secondary_tags": [
+      "设定解析",
+      "EXE/ネタ"
+    ],
+    "language": "英语",
+    "region_tag": "美区",
+    "is_managed": false,
+    "added_at": "2026-10-05T08:46:43.806536",
+    "discovered_videos": 1,
+    "discovered_total_views": 239954,
+    "custom_notes": "",
+    "tags": [
+      "auto_discovered",
+      "杂谈",
+      "设定解析",
+      "EXE/ネタ"
+    ]
   }
 ]
