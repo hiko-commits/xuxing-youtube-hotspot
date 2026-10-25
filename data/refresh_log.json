@@ -1,16 +1,5 @@
 [
   {
-    "timestamp": "2026-07-17T09:28:17.879412",
-    "status": "success",
-    "message": "Full refresh completed",
-    "stats": {
-      "videos_fetched": 64,
-      "reserve_creators": 9,
-      "managed_creators": 35,
-      "dedup_removed": 0
-    }
-  },
-  {
     "timestamp": "2026-07-18T08:28:04.785357",
     "status": "success",
     "message": "Full refresh completed",
@@ -1094,6 +1083,17 @@
     "message": "Full refresh completed",
     "stats": {
       "videos_fetched": 70,
+      "reserve_creators": 53,
+      "managed_creators": 35,
+      "dedup_removed": 0
+    }
+  },
+  {
+    "timestamp": "2026-10-25T07:29:22.865980",
+    "status": "success",
+    "message": "Full refresh completed",
+    "stats": {
+      "videos_fetched": 74,
       "reserve_creators": 53,
       "managed_creators": 35,
       "dedup_removed": 0
