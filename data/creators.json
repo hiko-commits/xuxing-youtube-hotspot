@@ -2541,5 +2541,79 @@
     "prev_video_count": 1305,
     "daily_sub_change": 0,
     "daily_view_change": 19090
+  },
+  {
+    "channel_id": "UCs6ftBzKRjdKNNIjogoGqVA",
+    "title": "The Game Archivist",
+    "description": "Hi and welcome to the den of the Game Archivist. On this channel I try to record and archive a great variety of games to keep their experience preserved. The longplay videos will be shot in high quality and give you the best viewing experience to make sure you get to witness everything that the game has to offer. Recordings are made on a variety of consoles and PC and requests can also be made, so if you want to see a specific game be played all the way through on this channel, then please let m",
+    "custom_url": "@thegamearchivist",
+    "country": "NL",
+    "published_at": "2021-06-03T18:22:01.053963Z",
+    "thumbnail": "https://yt3.ggpht.com/cjsL5TMqiA-SiH3nkEmiO103v3bxT7g_BGtFBI70vzeyasiDbeQc4-OFq0EWqQ3oMPrDsBvJNw=s800-c-k-c0x00ffffff-no-rj",
+    "banner": "https://yt3.googleusercontent.com/F8bsGYYNUvu5vIMDgTwd0pMWXrkVk4huy7OdvNIxkztvJJtoTyAImDuRfwBVsTNMJWyEPEfj",
+    "subscriber_count": 357000,
+    "video_count": 1084,
+    "view_count": 148835555,
+    "hidden_subscriber_count": false,
+    "keywords": "",
+    "fetched_at": "2026-11-09T09:32:58.768295",
+    "is_tracked": true,
+    "is_manual": false,
+    "notes": "",
+    "primary_tags": [
+      "玩法"
+    ],
+    "secondary_tags": [
+      "游戏试玩"
+    ],
+    "language": "英语",
+    "region_tag": "欧区",
+    "is_managed": false,
+    "added_at": "2026-11-09T09:32:58.768429",
+    "discovered_videos": 1,
+    "discovered_total_views": 5341497,
+    "custom_notes": "",
+    "tags": [
+      "auto_discovered",
+      "玩法",
+      "游戏试玩"
+    ]
+  },
+  {
+    "channel_id": "UCkthD6zUaOPEq5gQI0LetBg",
+    "title": "Chiken",
+    "description": "please clap\n\nBusiness: Chiken@Chiken.tv",
+    "custom_url": "@chiken",
+    "country": "US",
+    "published_at": "2021-05-03T20:26:14.42201Z",
+    "thumbnail": "https://yt3.ggpht.com/mas_SFqQuXq8-iYj7TdfMmXFIRydUrXHYc78xru7NSy66UVsCAPwbsGIT-lk5sB5FnDSi_KG=s800-c-k-c0x00ffffff-no-rj",
+    "banner": "https://yt3.googleusercontent.com/yeSBbJdpKeSSqjqnvJJTB19MLJnmrz_ykz2G4QQncYNsXjnRpQhy5Rx_QVybMAGv6W4IL3znib4",
+    "subscriber_count": 105000,
+    "video_count": 108,
+    "view_count": 16687770,
+    "hidden_subscriber_count": false,
+    "keywords": "Chiken",
+    "fetched_at": "2026-11-09T09:32:58.768656",
+    "is_tracked": true,
+    "is_manual": false,
+    "notes": "",
+    "primary_tags": [
+      "杂谈"
+    ],
+    "secondary_tags": [
+      "杂谈/吐槽"
+    ],
+    "language": "英语",
+    "region_tag": "美区",
+    "is_managed": false,
+    "added_at": "2026-11-09T09:32:58.768711",
+    "discovered_videos": 1,
+    "discovered_total_views": 2606660,
+    "custom_notes": "",
+    "tags": [
+      "auto_discovered",
+      "杂谈",
+      "杂谈/吐槽"
+    ]
   }
 ]
